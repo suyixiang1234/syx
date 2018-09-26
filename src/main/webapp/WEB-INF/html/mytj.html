@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 34.7222px;"><head>
+	<meta charset="utf-8">
+		<title>FTC</title>
+			<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<link href="${pd.basePath}static/xnb/css/global.css?v=1.0" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/style.css?v=1.2">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/swiper3.1.0.min.css?v=1.1">
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/1.7.2.min.js"></script>
+	<script src="${pd.basePath}static/xnb/js/index.js?v=1.7"></script>
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/wvke.js?v=1.1"></script>
+		 <script type="text/javascript" src="${pd.basePath}static/xnb/js/layer.js"></script>
+    <link rel="stylesheet" href="${pd.basePath}static/xnb/css/layer.css" id="layui_layer_skinlayercss">
+	<script type="text/javascript">
+		function() {
+				_fmOpt.imgLoaded = true;
+			};
+			var fm = document.createElement('script'); fm.type = 'text/javascript'; fm.async = true;
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fm, s);
+		})();
+	</script>
+	<script>
+		function _size(){
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 10.80 + 'px';
+		}
+		_size();
+		window.onresize = function(){
+			_size();
+		}
+	</script>
+</head><body>
+<div class="container">
+	<!--头部-->
+	<div class="head head_white po_re">
+		<div class="left">
+			<a href="yz_user"><img src="${pd.basePath}static/xnb/img/login_icon_arrow2.png" class="icon_cha"></a>
+		</div>
+		<div class="title">推荐用户</div>
+		<div class="right">
+							
+	</div>
+	</div>
+
+			<div class="main">
+			<div class="margin_lbian">
+				<form method="post">
+					<div class="form_box po_re findpw_tan">
+						<i class="form_icon  w_190">我的推荐码ID</i>
+						<div>
+							<div class="input_box po_re w_740"> <span>${pd.RIGHTS!}</span></div>
+						</div>
+					</div>
+					<div class="form_box po_re findpw_tan">
+						<i class="form_icon  w_190">分享下载链接</i>
+						<div>
+							<div class="input_box po_re w_740">
+                            <textarea class="input" id="foo" readonly="">${pd.basePath}/apps/ftc/${pd.RIGHTS!}</textarea>
+                            	
+                            </div>
+						</div>
+					</div>
+					
+					
+					<div class="form_btn">
+                        <a class="btn" data-clipboard-action="copy" data-clipboard-target="#foo">复制链接</a>
+					</div>
+					
+					<div class="form_link real_point mt_04 red clear">
+					<!--     <img src="http://app.uxex.vip/wap//images/login_icon_tan.png" class="icon_tan left"> -->
+						<p class="left">1.推荐码分享给朋友，让他们注册帐号时输入邀请码.</p>
+					</div>
+					<div class="form_link real_point mt_04 red clear">
+						<!-- <img src="http://app.uxex.vip/wap//images/login_icon_tan.png" class="icon_tan left"> -->
+						<p class="left">2.将邀请链接本文粘贴并发送给您的好友.</p>
+					</div>
+				</form>
+			</div>
+		</div>
+	
+
+</div>
+<script src="${pd.basePath}static/xnb/js/clipboard.min.js"></script>
+<script>
+    var clipboard = new Clipboard('.btn');
+
+    clipboard.on('success', function(e) {
+      
+		layer.alert("复制成功，请立即去分享");
+			 
+    	
+	
+       
+    });
+
+    clipboard.on('error', function(e) {
+        console.log(e);
+    });
+    </script>
+
+
+
+</body></html>

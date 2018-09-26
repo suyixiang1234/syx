@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BanksMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into xnb_banks(
+			realname,	
+			bank,	
+			province,	
+			city,	
+			bankname,	
+			banknum,	
+			times,	
+			user_id,	
+			remark,	
+			banks_id
+		) values (
+			#{realname},	
+			#{bank},	
+			#{province},	
+			#{city},	
+			#{bankname},	
+			#{banknum},	
+			#{times},	
+			#{user_id},	
+			#{remark},	
+			#{banks_id}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from xnb_banks
+		where 
+			banks_id = #{banks_id}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  xnb_banks
+			set 
+				realname = #{realname},
+				bank = #{bank},
+				province = #{province},
+				city = #{city},
+				bankname = #{bankname},
+				banknum = #{banknum},
+			banks_id = banks_id
+			where 
+				banks_id = #{banks_id}
+	</update>
+	
+	
+	<!-- 通过id获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			realname,	
+			bank,	
+			province,	
+			city,	
+			bankname,	
+			banknum,	
+			times,	
+			user_id,	
+			remark,	
+			banks_id
+		from 
+			xnb_banks
+		where 
+			banks_id = #{banks_id}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+			a.realname,	
+			a.bank,	
+			a.province,	
+			a.city,	
+			a.bankname,	
+			a.banknum,	
+			a.times,	
+			a.user_id,	
+			a.remark,	
+			a.banks_id
+		from 
+			xnb_banks a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="map">
+		select
+			a.realname,	
+			a.bank,	
+			a.province,	
+			a.city,	
+			a.bankname,	
+			a.banknum,	
+			a.times,	
+			a.user_id,	
+			a.remark,	
+			a.banks_id
+		from 
+			xnb_banks a
+		where a.user_id = #{user_id}
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from xnb_banks
+		where 
+			banks_id in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

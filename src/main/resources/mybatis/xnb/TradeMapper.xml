@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TradeMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into tb_trade(
+			user_id,	
+			price,	
+			t_counts,	
+			times,	
+			types,	
+			price_all,	
+			coins_id,
+			rates,
+			trade_id
+		) values (
+			#{user_id},	
+			#{price},	
+			#{t_counts},	
+			#{times},	
+			#{types},	
+			#{price}*#{t_counts},
+			#{coins_id},	
+			#{rates},	
+			#{trade_id}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from tb_trade
+		where 
+			trade_id = #{trade_id}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  tb_trade
+			set 
+				user_id = #{user_id},
+				price = #{price},
+				t_counts = #{t_counts},
+				times = #{times},
+				types = #{types},
+				price_all = #{price_all},
+			trade_id = trade_id
+			where 
+				trade_id = #{trade_id}
+	</update>
+	
+	
+	<!-- 通过id获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			user_id,	
+			price,	
+			t_counts,	
+			times,	
+			types,	
+			price_all,	
+			trade_id
+		from 
+			tb_trade
+		where 
+			trade_id = #{trade_id}
+	</select>
+	
+	
+	<!-- 通过id获取数据 -->
+	<select id="findByCountUser" parameterType="pd" resultType="pd">
+		select 
+			*
+		from 
+			xnb_counts_user
+		where 
+			coins_id = #{coins_id} and user_id = #{user_id}
+	</select>
+	
+	
+	<!-- 更新币值数量（买入）-->
+	<update id="editCountUser" parameterType="pd">
+		update  xnb_counts_user
+			set 
+			t_counts = t_counts + #{t_counts},
+			shijia = #{price},
+			moneys_all = moneys_all + #{price}*#{t_counts}
+			where 
+				coins_id = #{coins_id} and user_id = #{user_id}
+	</update>
+	
+	
+	<!-- 更新币值数量（卖出）-->
+	<update id="editSellCountUser" parameterType="pd">
+		update  xnb_counts_user
+			set 
+			t_counts = t_counts - #{t_counts},
+			moneys_all = moneys_all - shijia*#{t_counts}
+			where 
+			coins_id = #{coins_id} and user_id = #{user_id}
+	</update>
+	
+	<!-- 新增-->
+	<insert id="saveCountUser" parameterType="pd">
+		insert into xnb_counts_user(
+		    user_id,
+			coins_id,	
+			t_counts,
+			moneys_all,
+			shijia,
+			counts_user_id
+		) values (
+			#{user_id},	
+			#{coins_id},
+			#{t_counts},
+			#{price}*#{t_counts},
+			#{price},		
+			#{counts_user_id}
+		)
+	</insert>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+			a.user_id,	
+			b.USERNAME,
+			a.price,	
+			a.t_counts,	
+			a.times,	
+			a.types,	
+			a.price_all,	
+			a.trade_id
+		from 
+			tb_trade a
+		left join SYS_APP_USER b on a.user_id = b.USER_ID
+		
+		order by a.times desc
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage1" parameterType="page" resultType="map">
+		select
+			a.user_id,	
+			a.price,	
+			a.t_counts,	
+			a.times,	
+			a.types,	
+			a.price_all,	
+			a.trade_id
+		from 
+			tb_trade a
+		where a.coins_id = #{pd.coins_id}
+		order by a.times desc
+	</select>
+	
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+			a.user_id,	
+			a.price,	
+			a.t_counts,	
+			a.times,	
+			a.types,	
+			a.price_all,	
+			a.trade_id
+		from 
+			tb_trade a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAllByUserId" parameterType="pd" resultType="map">
+		select
+			a.user_id,	
+			a.price,	
+			a.t_counts,	
+			a.times,	
+			a.types,	
+			a.price_all,
+			a.price_all*(1-a.rates) as zhp,
+			a.trade_id
+		from 
+			tb_trade a
+		where a.user_id =#{user_id}
+		<if test="coins_id != 'no'">
+	  	and	 a.coins_id = #{coins_id}
+		</if>
+		order by a.times desc
+	</select>
+	
+	
+	<!-- 会员资产 -->
+	<select id="listAllByCoin" parameterType="pd" resultType="map">
+		select
+		  b.*,
+		  a.name,
+		  a.money,
+		  a.up_money,
+		  a.img
+		from 
+		   xnb_coins a
+		left join xnb_counts_user b on 
+		   a.coins_id = b.coins_id
+		where 
+		   b.user_id = #{user_id}
+	</select>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from tb_trade
+		where 
+			trade_id in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

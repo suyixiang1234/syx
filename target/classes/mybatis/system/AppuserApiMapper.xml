@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AppuserApiMapper">
+	
+	
+	<!-- 更新登录时间 -->
+	<update id="updateLastLogin" parameterType="pd">
+		update sys_app_user set 
+		last_login = #{last_login} 
+		where user_id = #{user_id}
+	</update>
+	
+	<!-- 判断用户名和密码 -->
+	<select id="getUserByLogin" parameterType="pd" resultType="pd">
+		select * from sys_app_user 
+		where 
+	         STATUS = 1
+	         and
+	  		
+	  		(
+	  		(username = #{username} and password = #{password})
+	  		or
+	  		(PHONE = #{username} and password = #{password})
+	
+	  		)
+		
+	</select>
+	
+	<!-- 存入IP -->
+	<update id="saveIP" parameterType="pd">
+		update sys_app_user 
+			set 
+				ip = #{ip}
+			where 
+				username = #{username}
+	</update>
+	
+	<!-- 修改用户 -->
+	<update id="edit" parameterType="pd">
+		update  sys_app_user
+			set username				= #{username},
+				name					= #{name},
+				role_id 				= #{role_id},
+				bz						= #{bz},
+				phone 					= #{phone},
+				sfid 					= #{sfid},
+				start_time	 			= #{start_time},
+				end_time 				= #{end_time},
+				years					= #{years},
+				status 					= #{status},
+				email					= #{email},
+				number 					= #{number}
+			<if test="password != null and password != ''">
+				,password				= #{password}
+			</if>
+			where 
+				user_id = #{user_id}
+	</update>
+	
+	<!-- 通过user_id获取数据 -->
+	<select id="findByUserid" parameterType="pd" resultType="pd">
+		select 
+		   *
+		from 
+			sys_app_user
+		where 
+			user_id = #{user_id}
+	</select>
+	
+	
+	
+	<select id="findByRz" parameterType="pd" resultType="pd">
+		select 
+		   *
+		from 
+			sys_app_user
+		where 
+			user_id = #{user_id} and PASSWORD2 = #{paypassword} and is_rz = 2
+	</select>
+	
+	
+	<!-- 通过邮箱获取数据 -->
+	<select id="findByEmail" parameterType="pd" resultType="pd">
+		select 
+			user_id	
+		from 
+			sys_app_user
+		where 
+			USERNAME = #{USERNAME} 
+	</select>
+	
+	
+    <!-- 通过邮箱获取数据 -->
+	<select id="findByPhone" parameterType="pd" resultType="pd">
+		select 
+			user_id	
+		from 
+			sys_app_user
+		where 
+			 PHONE = #{PHONE}
+	</select>
+	
+	<!-- 通过编号获取数据 -->
+	<select id="findByNumber" parameterType="pd" resultType="pd">
+		select 
+			user_id,
+			username,
+			password,
+			name,
+			rights,
+			role_id,
+			last_login,
+			ip,
+			status,
+			bz,
+			phone,
+			sfid,
+			start_time,
+			end_time,
+			years,
+			email,
+			number,
+			member_id,
+			parentid,
+			relation,
+			floors
+		from 
+			sys_app_user
+		where 
+			number = #{number}
+	</select>
+	
+	<!-- 通过username获取数据 -->
+	<select id="findByUserame" parameterType="pd" resultType="pd">
+		select 
+			user_id,
+			username,
+			password,
+			name,
+			rights,
+			role_id,
+			last_login,
+			ip,
+			status,
+			bz,
+			phone,
+			sfid,
+			start_time,
+			end_time,
+			years,
+			email,
+			number,
+			member_id,
+			parentid,
+			relation,
+			floors
+		from 
+			sys_app_user
+		where 
+			username = #{username}
+	</select>
+	
+	<!-- 新增app用户 -->
+	<insert id="save" parameterType="pd">
+		insert into sys_app_user (
+			username,
+			password,
+			name,
+			rights,
+			role_id,
+			last_login,
+			ip,
+			status,
+			bz,
+			phone,
+			sfid,
+			start_time,
+			end_time,
+			years,
+			email,
+			number,
+			member_id,
+			parentid,
+			relation,
+			floors
+		) values (
+			#{username},
+			#{password},
+			#{name},
+			#{rights},
+			#{role_id},
+			#{last_login},
+			#{ip},
+			#{status},
+			#{bz},
+			#{phone},
+			#{sfid},
+			#{start_time},
+			#{end_time},
+			#{years},
+			#{email},
+			#{number},
+			#{member_id},
+			#{parentid},
+			#{relation},
+			#{floors}
+		)
+	</insert>
+	<!-- 用户列表(app用户组) -->
+	<select id="userlistPage" parameterType="page" resultType="pd">
+		select  u.user_id,
+				u.username,
+				u.password,
+				u.last_login,
+				u.name,
+				u.ip,
+				u.end_time,
+				u.years,
+				u.status,
+				u.email,
+				u.phone,
+				u.number,
+				u.user_id,
+				u.username,
+				u.password,
+				u.last_login,
+				u.name,
+				u.ip,
+				u.end_time,
+				u.years,
+				u.status,
+				u.email,
+				u.phone,
+				u.number,
+				u.member_id,
+				u.parentid,
+				u.relation,
+				u.floors,
+				r.role_id,
+				r.role_name
+		from sys_app_user u, sys_role r 
+		where u.role_id = r.role_id 
+		and 1 = 1
+		and r.parent_id = '7'
+		
+		<if test="pd.username != null and pd.username != ''"><!-- 用户名检索 -->
+			and (
+				u.username like concat(concat('%', #{pd.username}),'%')
+				or
+				u.email like concat(concat('%', #{pd.username}),'%')
+				or
+				u.number like concat(concat('%', #{pd.username}),'%')
+				)
+		</if>
+		<if test="pd.role_id != null and pd.role_id != ''"><!-- 角色检索 -->
+			and u.role_id=#{pd.role_id} 
+		</if>
+		<if test="pd.lastloginstart!=null and pd.lastloginstart!=''"><!-- 到期时间检索 -->
+			and u.end_time &gt;= #{pd.lastloginstart} 
+		</if>
+		<if test="pd.lastloginend!=null and pd.lastloginend!=''"><!-- 到期时间检索 -->
+			and u.end_time &lt;= #{pd.lastloginend} 
+		</if>
+		<if test="pd.status != null and pd.status != ''"><!-- 状态检索 -->
+			and u.status=#{pd.status} 
+		</if>
+	</select>
+	
+	<!-- 用户列表(按关系查询) -->
+	<select id="userFloorslistPage" parameterType="page" resultType="pd">
+		select  u.user_id,
+				u.username,
+				u.password,
+				u.last_login,
+				u.name,
+				u.ip,
+				u.end_time,
+				u.years,
+				u.status,
+				u.email,
+				u.phone,
+				u.number,
+				u.member_id,
+				u.parentid,
+				u.relation,
+				u.floors,
+				r.role_id,
+				r.role_name
+		from sys_app_user u, sys_role r 
+		where u.role_id = r.role_id 
+		and 1 = 1
+		and r.parent_id = '7'
+		
+		<if test="pd.keyword != null and pd.keyword != ''">用户名检索
+			and (
+				u.username like concat(concat('%', #{pd.keyword}),'%')
+				or
+				u.email like concat(concat('%', #{pd.keyword}),'%')
+				or
+				u.number like concat(concat('%', #{pd.keyword}),'%')
+				or
+				u.name like concat(concat('%', #{pd.keyword}),'%')
+				or
+				u.phone like concat(concat('%', #{pd.keyword}),'%')
+				)
+		</if>
+		<if test="pd.type != null and pd.user_id != null">
+		    <!-- 查询user_id的所有下级 -->
+			<if test="pd.type == 0">
+			    and u.relation like concat('%,',#{pd.user_id},',%')
+			</if>
+			<!-- 查询user_id的第n级 -->
+			<if test="pd.type == 1 and pd.floors != null">
+			    and u.relation like concat('%,',#{pd.user_id},',%') and u.floors=#{pd.floors}
+			</if>
+			<!-- 查询user_id的n级以内包括n级的下级 -->
+			<if test="pd.type == 2 and pd.floors != null">
+			    and u.relation like concat('%,',#{pd.user_id},',%') and u.floors &lt;= #{pd.floors}
+			</if>
+			<!-- 查询user_id的n级以上包括n级的下级 -->
+			<if test="pd.type == 3 and pd.floors != null">
+			    and u.relation like concat('%,',#{pd.user_id},',%') and u.floors &gt;= #{pd.floors}
+			</if>
+			<!-- 查询user_id的第m级到第n级的下级 -->
+			<if test="pd.type == 4 and pd.floors_start != null and pd.floors_end != null">
+			    and u.relation like concat('%,',#{pd.user_id},',%') and u.floors between #{pd.floors_start} and #{pd.floors_end}
+			</if>
+			<!-- 以上查询不包括自己 -->
+			and u.user_id!=#{pd.user_id}
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,6 @@
+注意：事件实现类（*EventPubLisher.java）和事件发布类（*Listener.java）需要注册到spring-event.xml中
+例如：
+<!-- 注册监听事件 -->
+<bean id="registerEventPubLisher" class="com.fh.event.eventPublisher.user.RegisterEventPubLisher" />  
+<!-- 注册实现监听业务 -->
+<bean id="registerListener" class="com.fh.event.eventListener.user.RegisterListener" />  

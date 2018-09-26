@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 34.7222px;"><head>
+	<meta charset="utf-8">
+	<title>FTC</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<link href="${pd.basePath}static/xnb/css/global.css?v=1.0" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/style.css?v=1.2">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/swiper3.1.0.min.css?v=1.1">
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/1.7.2.min.js"></script>
+	<script src="${pd.basePath}static/xnb/js/index.js?v=1.7"></script>
+	 <script type="text/javascript" src="${pd.basePath}static/xnb/js/layer.js"></script>
+    <link rel="stylesheet" href="${pd.basePath}static/xnb/css/layer.css" id="layui_layer_skinlayercss">
+	<script>
+		function _size(){
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 10.80 + 'px';
+		}
+		_size();
+		window.onresize = function(){
+			_size();
+		}
+	</script>
+</head><body style="padding-bottom: 1.5rem">
+<div class="container">
+	<!--头部-->
+
+	<div class="head head_white">
+		<div class="left">
+			<a href="yz_user"><img src="${pd.basePath}static/xnb/img/login_icon_arrow2.png" class="icon_cha"></a>
+		</div>
+		<div class="title">提现</div>
+		<div class="right">
+			<a href="yz_txRecordList"><img src="${pd.basePath}static/xnb/img/icon_list.png" class="icon_list"></a>
+		</div>
+	</div>
+	
+	<div style="height: 0.0rem;width: 100%;margin-top: 1.53rem">
+		<div style="float: left;width: 50%;height:1.1rem;background-color:#5EADEC;color: #fff;font-size: 0.5rem;text-align: center;line-height: 1.1rem"><b>提现</b></div>
+		<a href="yz_mycz.html"><div style="float: left;width: 50%;height:1.1rem;background-color: #9d9c9b;color: #fff;font-size: 0.5rem;text-align: center;line-height: 1.1rem"><b>充值</b></div></a>
+	</div>
+	<div class="main">
+		<div class="margin_lbian">
+			<form id="form">
+				<div class="form_box po_re findpw_tan">
+					<i class="form_icon  w_230">银 行 卡</i>
+					<div>
+						<div class="select_box w_670 left">
+						<select name="type" class="select" id="mytx_type">
+						     <#list myBankList as b>
+							  <option value="${b.banks_id}">${b.bank}</option>
+							 </#list>
+						</select>
+						</div>
+						<a href="bank.html" class="icon_add right"><img src="${pd.basePath}static/xnb/img/icon_list.png" class="icon_list"> </a>
+					</div>
+				</div>
+				<div class="form_box po_re findpw_tan">
+					<i class="form_icon  w_230">金额</i>
+					<div>
+						<div class="input_box po_re left"><input type="text" name="num" id="num" class="input w_430 subMoneyali" placeholder="输入提现金额"></div>
+						<span class="right green fz_4">
+							<font style="font-size:12px;" color="5eadec">(总：¥<em style="font-size:12px;" onclick="$('#num').val(0)">${pd.moneys} </em>)</font>
+						</span>
+					</div>
+				</div>
+				<!--<div class="form_arrival pl_230 wfull">
+					<span class="mr_20">到账:</span>
+						<input type="text" id="monet_dz" name="monet_dz" class="input w_570" placeholder="0" disabled>
+				</div>-->
+				<!-- 
+				<div class="form_box po_re findpw_tan">
+					<i class="form_icon  w_230">交易密码</i>
+					<div>
+						<div class="input_box po_re w_740"><input type="password" id="paypassword" name="paypassword" class="input" placeholder="请输入交易密码"></div>
+					</div>
+				</div> 
+				-->
+				    
+				    
+			    <div class="form_box po_re findpw_tan">
+			 		<i class="form_icon w_230">手机号码</i>
+					<div>
+						<div class="input_box po_re w_740">
+						<input type="text" name="moble" id="moble"  readonly class="text" value="${pd.PHONE!}"/>
+						</div>
+					</div>
+				</div>
+					
+					
+					
+				<div class="form_box po_re findpw_tan">
+				    <i class="form_icon w_230">图形验证码</i>
+					<div>
+						<div class="input_box w_700 po_re"><input type="text" id="verify" name="verify" onblur="regverify()" class="input" placeholder="输入右侧验证码"></div>
+					</div>
+					    <span class="code_box right">
+                        <img id="codeImg" src="${pd.basePath}code.do" onclick="this.src=this.src+'?t='+Math.random()" style="float: left;padding:7px; cursor: pointer;" title="换一张" class="gfs code_input">
+                    </span>
+				</div>
+				
+			    <tr>
+					<div class="form_box po_re findpw_yzm clear ml_230">
+						<input type="button" id="regBtn"  onclick="SendCode()" value="获取短信验证码" class="yzm_sms"/>
+					</div>
+				</tr> 
+				    
+			    </tr>
+					<div class="form_box po_re findpw_tan">
+						<i class="form_icon w_230">手机验证码</i>
+						<div>
+							<div class="input_box po_re w_740"><input type="text" name="moble_verify" id="moble_verify" class="text"/></div>
+						</div>
+					</div>
+				<div class="form_btn">
+					<input type="button" class="btn" onclick="Update()" name="deposit_next" id="deposit_next" value="确认提現">
+				</div>
+			</form>
+			<div class="withdraw_con border_none">
+				<h2 class="fz_4 gfs">提现须知</h2>
+				<p>（申请提现后24小时内到账 - 周六周日延迟），提现将扣除5%手续费，如果银行卡和名字错误导致24小时不到账，联系客服处理！</p>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+<script type="text/javascript">
+	function subMoneyKeyUp(obj,event) {
+		event = event ? event : window.event;
+		if(typeof event !='undefined' && (event.keyCode == 37 || event.keyCode == 39)){
+			return;
+		}
+		obj.value=obj.value.replace(/\D	/g,'');
+		var cnyTotal = parseFloat(obj.value+$(".random").html());
+	}
+	$(".subMoneyali").blur(function (e){
+		if($(e.relatedTarget).attr('id')=='tfmoney'){
+			return ;
+		}
+		$(this).val() < 100 ? $(this).val(100):'';
+		subMoneyKeyUp(this);
+	});
+	
+	function wm() {
+		$.post('/ajax/wm/', $('#form').serialize(), function (d) {
+			ajax_islogin(d);
+			layer.alert(d.msg);
+			if (d.status) location.reload();
+		}, 'json');
+	}
+
+	
+	function SendCode() {
+
+   		var moble = $("#moble").val();
+        var verify = $("#verify").val();
+        if (verify == "" || verify == null) {
+            layer.alert('请先输入图形验证码');
+            return false;
+        }
+		$('#regBtn').attr("disabled", "disabled");
+		$.post("sendSms", { PHONE: moble, code: verify}, function (data) {
+			if (data.status == 1) {
+				layer.alert(data.message, {
+					icon: 1
+				});
+				var obj = $('#regBtn');
+				var wait = 120;
+				var interval = setInterval(function () {
+					obj.css('backgroundColor', '#999B9C');
+					obj.val(wait + '秒再次发送');
+					wait--;
+					if (wait < 0) {
+						clearInterval(interval);
+						obj.val('获取验证码');
+						$('#regBtn').removeAttr("disabled");
+						obj.css('backgroundColor', '#0096e0');
+					}
+					;
+				}, 1000);
+			} else {
+				layer.alert(data.message, {
+					icon: 2
+				});
+			}
+		}, "json");
+	}
+	
+	
+	//提现
+	function Update() {
+		var num = $("#num").val();
+		/* var paypassword = $("#paypassword").val(); */
+		var moble_verify = $("#moble_verify").val();
+		var type = $('#mytx_type option:selected').val();
+		if (num == "" || num == null) {
+		   layer.alert('请输入提现金额');
+			return false;
+		}
+		
+		/* if (paypassword == "" || paypassword == null) {
+		layer.alert('请输入交易密码');
+			return false;
+		}
+		 */
+		if (moble_verify == "" || moble_verify == null) {
+			layer.alert('请输入短信验证码');
+			return false;
+		}
+		
+		$.post("yz_tx_save", {
+			banks_id: type,
+			tmoneys: num,
+			moble_verify: moble_verify
+		}, function (data) {
+			if (data.status == 1) {
+				layer.alert(data.message);
+				setTimeout(function(){
+			  		window.location = "yz_txRecordList";
+			  	 }, 2000);
+				
+			} else {
+			layer.alert(data.message);
+				
+			}
+		}, "json");
+	}
+
+
+</script>
+<style type="text/css">
+	/*底部*/
+	a {
+		text-decoration: none;
+	}
+
+	li,ul,dl {
+		list-style-type: none;
+	}
+	ul{
+	     padding:0;margin:0;list-style:none
+	}
+	.footer{
+		width: 100%;
+	  height: 54px;
+		background-color: #fff;
+		position: fixed;
+		bottom: 0px;
+	    left: 0px;
+	    z-index: 2;
+	border-top:1px solid rgba(204, 204, 204, 0.4196078431372549); 
+		font-size: 13px;
+	    color: #767676;
+	}
+	.footer li{
+		width:25%;
+		float:left;
+		text-align:center;
+		margin-top: 5px;
+	}
+	.footer li>a{
+	  height: 100%;
+	  width: 100%;
+
+	  text-align: center;
+	  
+	  color: #767676;
+	  
+	}
+	.footer li>a.active{
+		color: #0789FE;
+	}
+	.footer li img{
+		height: 0.8rem;
+		width: 30%;
+		display: block;
+	    margin: 0 auto;
+	}
+	.footer li i{
+		display:block;
+		font-size:20px;
+		margin:0 auto;
+	}
+</style>
+<div class="footer" style="z-index: 999">
+    <ul>
+        
+        <li><a href="index" class="block"><img  src="${pd.basePath}static/xnb/img/indexs.png"><div>
+        	<font size="1">首页</font>
+        </div></a></li>
+		<li><a href="yz_finance" class="block"><img src="${pd.basePath}static/xnb/img/zcmxs.png"><div>
+        	<font size="1">资产明细</font>
+        </div></a></li>
+		<li><a href="yz_mytx.html" class="block active"><img src="${pd.basePath}static/xnb/img/cwzx.png"><div>
+        	<font size="1">财务中心</font>
+        </div></a></li>
+        <li><a href="yz_user.html" class="block"><img src="${pd.basePath}static/xnb/img/grs.png"><div>
+        	<font size="1">个人中心</font>
+        </div></a></li>
+    </ul>
+</div>  
+
+
+</body></html>

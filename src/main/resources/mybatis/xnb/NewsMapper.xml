@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="NewsMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into xnb_news(
+			title,	
+			content,	
+			create_time,	
+			news_id
+		) values (
+			#{title},	
+			#{content},	
+			#{create_time},	
+			#{news_id}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from xnb_news
+		where 
+			news_id = #{news_id}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  xnb_news
+			set 
+				title = #{title},
+				content = #{content},
+			news_id = news_id
+			where 
+				news_id = #{news_id}
+	</update>
+	
+	
+	<!-- 通过id获取数据 -->
+	<select id="findById" parameterType="pd" resultType="map">
+		select 
+			title,	
+			content,	
+			create_time,	
+			news_id
+		from 
+			xnb_news
+		where 
+			news_id = #{news_id}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+			a.title,	
+			a.content,	
+			a.create_time,	
+			a.news_id
+		from 
+			xnb_news a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="map">
+		select
+			a.title,	
+			a.content,	
+			a.create_time,	
+			a.news_id
+		from 
+			xnb_news a
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from xnb_news
+		where 
+			news_id in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

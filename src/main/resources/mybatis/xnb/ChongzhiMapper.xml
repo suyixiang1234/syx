@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ChongzhiMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into tb_chongzhi(
+			no,	
+			user_id,	
+			moneys,	
+			statues,	
+			times,	
+			bank,	
+			chongzhi_id
+		) values (
+			#{no},	
+			#{user_id},	
+			#{moneys},	
+			#{statues},	
+			#{times},
+			#{bank},		
+			#{chongzhi_id}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from tb_chongzhi
+		where 
+			chongzhi_id = #{chongzhi_id}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  tb_chongzhi
+			set 
+				statues = #{statues},
+			
+			chongzhi_id = chongzhi_id
+			where 
+				chongzhi_id = #{chongzhi_id}
+	</update>
+	
+	
+	<!-- 通过id获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			a.no,	
+			a.user_id,	
+			a.moneys,	
+			a.statues,	
+			a.times,
+			a.bank,	
+			b.USERNAME,
+		    b.PHONE,
+		    b.PARENT_ID,
+			a.chongzhi_id
+		from 
+			tb_chongzhi a
+		left join sys_app_user b on a.user_id = b.USER_ID
+		where 
+			a.chongzhi_id = #{chongzhi_id}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+			a.no,	
+			a.user_id,	
+			a.moneys,	
+			a.statues,	
+			a.times,	
+		    a.bank,
+		    b.USERNAME,
+		    b.PHONE,
+			a.chongzhi_id
+		from 
+			tb_chongzhi a
+	    left join sys_app_user b on a.user_id = b.USER_ID
+	    order by a.times desc
+			
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="map">
+		select
+			a.*
+		from 
+			tb_chongzhi a
+		where a.user_id = #{user_id}
+		order by a.times desc
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from tb_chongzhi
+		where 
+			chongzhi_id in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

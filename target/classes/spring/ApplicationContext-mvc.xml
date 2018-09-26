@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd	
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<mvc:annotation-driven/>	
+	<mvc:default-servlet-handler/>
+	<context:component-scan base-package="com.fh.controller" />
+	<context:component-scan base-package="com.json" />
+	<context:component-scan base-package="websocket" />
+	<context:component-scan base-package="mqtt" />
+	<!-- 对静态资源文件的访问  restful-->     
+	<mvc:resources mapping="/admin/**" location="/,/admin/" />
+	<mvc:resources mapping="/static/**" location="/,/static/" />
+	<mvc:resources mapping="/plugins/**" location="/,/plugins/" />
+	<mvc:resources mapping="/uploadFiles/**" location="/,/uploadFiles/" /> 
+	<!-- 访问拦截  -->  
+  	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/**"/>
+			<bean class="com.fh.interceptor.LoginHandlerInterceptor"/>
+		</mvc:interceptor>
+	     <mvc:interceptor>    
+         <mvc:mapping path="/app*/yz_*.do" />    
+             <bean class="com.fh.interceptor.TokenInterceptor"> 
+             </bean>  
+        </mvc:interceptor>
+        <!-- 前端控制验证登录拦截器 -->
+        <mvc:interceptor>
+			<mvc:mapping path="/html*/yz_*" />
+			<bean class="com.fh.interceptor.TokenInterceptorweb">
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	<!-- 配置SpringMVC的视图解析器 -->
+	<bean id="JSPViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
+		<!-- <property name="viewNames" value="*jsp" /> -->
+		<property name="order" value="1"/>  
+	</bean>
+	 <!-- 设置freeMarker的配置文件路径 -->
+	<bean id="freemarkerConfiguration"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	</bean>
+	<!-- 配置freeMarker的模板路径 -->
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="freemarkerSettings" ref="freemarkerConfiguration"/>
+		<property name="templateLoaderPath" value="/WEB-INF/html/"/>
+		<property name="defaultEncoding" value="UTF-8" /> <!-- 防止乱码  -->
+		<property name="freemarkerVariables">
+			<map>
+				<entry key="xml_escape" value-ref="fmXmlEscape" />
+			</map>
+		</property>
+	</bean>
+	<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
+	<bean id="FMViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+       <!--  <property name="viewNames" value="*html" /> -->
+        <property name="contentType" value="text/html; charset=utf-8"/>
+        <property name="cache" value="true" />
+        <!-- <property name="prefix" value="/WEB-INF/html/" /> -->
+        <property name="suffix" value=".html" />
+        <property name="order" value="0"></property>
+    </bean>
+	
+	
+	<bean id="exceptionResolver" class="com.fh.resolver.MyExceptionResolver"></bean>
+	<!-- 上传拦截，如最大上传值及最小上传值 -->
+	  <bean id="multipartResolver"   class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >   
+		  <property name="maxUploadSize">    
+	          <value>104857600</value>    
+	       </property>   
+	        <property name="maxInMemorySize">    
+	            <value>4096</value>    
+	        </property>   
+	         <property name="defaultEncoding">    
+	            <value>utf-8</value>    
+	        </property> 
+    </bean>  
+    
+    
+    
+    
+    
+    <bean id="headController" class="com.fh.controller.system.head.HeadController"></bean>   
+      
+    <!-- 每隔12小时 执行一次 -->   
+    <bean id="ZntaskTopSaleJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">   
+    <property name="targetObject" ref="headController"></property>   
+    <property name="targetMethod" value="zntask"></property>   
+    </bean>   
+      
+      
+    <bean id="zntaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">   
+    <property name="jobDetail">   
+    <ref bean="ZntaskTopSaleJobDetail"/>   
+    </property>   
+    <property name="cronExpression">   
+    <value>0/10 * * * * ?</value>         
+    </property>         
+    </bean>   
+      
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">   
+      <property name="triggers">   
+    <list>   
+    <ref bean="zntaskTrigger"/>   
+    </list>    
+      </property>   
+    </bean>  
+   
+	<!--    
+	    时间的配置如下：   
+	<value>0 26 16 * * ?value>   
+	  
+	时间大小由小到大排列，从秒开始，顺序为 秒，分，时，天，月，年    *为任意 ？为无限制。由此上面所配置的内容就是，在每天的16点26分启动znrwdb方法   
+	  
+	具体时间设定可参考   
+	  
+	"0/10 * * * * ?" 每10秒触发   
+	  
+	"0 0 12 * * ?" 每天中午12点触发   
+	"0 15 10 ? * *" 每天上午10:15触发   
+	"0 15 10 * * ?" 每天上午10:15触发   
+	"0 15 10 * * ? *" 每天上午10:15触发   
+	"0 15 10 * * ? 2005" 2005年的每天上午10:15触发   
+	"0 * 14 * * ?" 在每天下午2点到下午2:59期间的每1分钟触发   
+	"0 0/5 14 * * ?" 在每天下午2点到下午2:55期间的每5分钟触发   
+	"0 0/5 14,18 * * ?" 在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发   
+	"0 0-5 14 * * ?" 在每天下午2点到下午2:05期间的每1分钟触发   
+	"0 10,44 14 ? 3 WED" 每年三月的星期三的下午2:10和2:44触发   
+	"0 15 10 ? * MON-FRI" 周一至周五的上午10:15触发   
+	"0 15 10 15 * ?" 每月15日上午10:15触发   
+	"0 15 10 L * ?" 每月最后一日的上午10:15触发   
+	"0 15 10 ? * 6L" 每月的最后一个星期五上午10:15触发   
+	"0 15 10 ? * 6L 2002-2005" 2002年至2005年的每月的最后一个星期五上午10:15触发   
+	"0 15 10 ? * 6#3" 每月的第三个星期五上午10:15触发   
+	每隔5秒执行一次：*/5 * * * * ?   
+	每隔1分钟执行一次：0 */1 * * * ?   
+	每天23点执行一次：0 0 23 * * ?   
+	每天凌晨1点执行一次：0 0 1 * * ?   
+	每月1号凌晨1点执行一次：0 0 1 1 * ?   
+	每月最后一天23点执行一次：0 0 23 L * ?   
+	每周星期天凌晨1点实行一次：0 0 1 ? * L   
+	在26分、29分、33分执行一次：0 26,29,33 * * * ?   
+	每天的0点、13点、18点、21点都执行一次：0 0 0,13,18,21 * * ?    
+	
+	-->
+    
+	
+</beans>

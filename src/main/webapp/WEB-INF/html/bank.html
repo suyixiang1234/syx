@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 34.7222px;"><head>
+	<meta charset="utf-8">
+		<title>FTC</title>
+			<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<link href="${pd.basePath}static/xnb/css/global.css?v=1.0" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/style.css?v=1.2">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/swiper3.1.0.min.css?v=1.1">
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/1.7.2.min.js"></script>
+	<script src="${pd.basePath}static/xnb/js/index.js?v=1.7"></script>
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/wvke.js?v=1.1"></script>
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/cityselect.js"></script>
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/layer.js"></script>
+    <link rel="stylesheet" href="${pd.basePath}static/xnb/css/layer.css" id="layui_layer_skinlayercss">
+	
+	
+	<script>
+		function _size(){
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 10.80 + 'px';
+		}
+		_size();
+		window.onresize = function(){
+			_size();
+		}
+	</script>
+</head><body>
+<div class="container">
+	<!--头部-->
+	<div class="head head_white">
+		<div class="left">
+		<a onclick="history.go(-1)"><img src="${pd.basePath}static/xnb/img/login_icon_arrow2.png" class="icon_cha"></a>
+		</div>
+		<div class="title">添加银行卡</div>
+		<div class="right">
+		</div>
+	</div>
+	<div class="main pb_0">
+		<div class="margin_lbian">
+			<form id="form" name="form">
+				<!-- 
+				<div class="form_box po_re findpw_tan">
+					<i class="form_icon  w_190">备注名称</i>
+					<div>
+						<input type="text" id="bank_name" name="name" class="input hui_a" value="" "="">
+					</div>
+				</div>
+				 -->
+				<div class="form_box po_re findpw_tan">
+					<i class="form_icon  w_190">持 卡 人</i>
+					<div>
+						<input type="text" class="input hui_a"  id="realname"    value="" >
+					</div>
+				</div>
+				<div class="form_box po_re findpw_tan">
+					<i class="form_icon  w_190">选择银行</i>
+					<div class="select_box" style="width:6.8rem!important">
+						<select name="bank" id="bank_bank" class="select">
+						<option value="支付宝">支付宝</option><option value="平安银行">平安银行</option><option value="浦发银行">浦发银行</option><option value="邮政银行">邮政银行</option><option value="工商银行">工商银行</option><option value="广发银行">广发银行</option><option value="交通银行">交通银行</option><option value="民生银行">民生银行</option><option value="招商银行">招商银行</option><option value="中信银行">中信银行</option><option value="兴业银行">兴业银行</option><option value="光大银行">光大银行</option><option value="建设银行">建设银行</option><option value="北京银行">北京银行</option><option value="农业银行">农业银行</option><option value="中国银行">中国银行</option>						</select>
+					</div>
+				</div>
+				<div style="display: none" id="bank_input" class="form_box po_re findpw_tan">
+					<i class="form_icon  w_190">银行名称</i>
+					<div id="bank_input_val">
+						<div class="input_box po_re w_740"><input type="text" class="input"></div>
+					</div>
+				</div>
+
+				<div class="form_box po_re findpw_tan" style="width:102%">
+					<i class="form_icon  w_190">开户省市</i>
+					<div>
+						
+						<span class="controls" id="city_1">
+	 					<select class="select prov" id="bank_bankprov" name="prov" style="width: 110px;"><option value="">--请选择--</option><option value="北京">北京</option><option value="天津">天津</option><option value="河北">河北</option><option value="山西">山西</option><option value="内蒙古">内蒙古</option><option value="辽宁">辽宁</option><option value="吉林">吉林</option><option value="黑龙江">黑龙江</option><option value="上海">上海</option><option value="江苏">江苏</option><option value="浙江">浙江</option><option value="安徽">安徽</option><option value="福建">福建</option><option value="江西">江西</option><option value="山东">山东</option><option value="河南">河南</option><option value="湖北">湖北</option><option value="湖南">湖南</option><option value="广东">广东</option><option value="广西">广西</option><option value="海南">海南</option><option value="重庆">重庆</option><option value="四川">四川</option><option value="贵州">贵州</option><option value="云南">云南</option><option value="西藏">西藏</option><option value="陕西">陕西</option><option value="甘肃">甘肃</option><option value="青海">青海</option><option value="宁夏">宁夏</option><option value="新疆">新疆</option><option value="香港">香港</option><option value="澳门">澳门</option><option value="台湾">台湾</option><option value="国外">国外</option></select>
+	 					<select class="city select" id="bank_bankcity" name="city" style="width: 110px;"><option value="">--请选择--</option><option value="和平区">和平区</option><option value="河东区">河东区</option><option value="河西区">河西区</option><option value="南开区">南开区</option><option value="河北区">河北区</option><option value="红挢区">红挢区</option><option value="滨海新区">滨海新区</option><option value="东丽区">东丽区</option><option value="西青区">西青区</option><option value="津南区">津南区</option><option value="北辰区">北辰区</option><option value="宁河区">宁河区</option><option value="武清区">武清区</option><option value="静海县">静海县</option><option value="宝坻区">宝坻区</option><option value="蓟县">蓟县</option></select></span>
+					</div>
+				</div>
+				<div class="form_box po_re findpw_tan">
+					<i class="form_icon  w_190">开户支行</i>
+					<div>
+						<div class="input_box po_re w_740"><input type="text" id="bank_bankaddr" name="bank_bankaddr" class="input" placeholder="请输入详细的开户支行名称"></div>
+					</div>
+				</div>
+				<div class="form_box po_re findpw_tan">
+					<i class="form_icon  w_190">银行卡号</i>
+					<div>
+						<div class="input_box po_re w_740"><input type="text" id="bank_bankcard" name="bank_bankcard" class="input" placeholder="请输入银行卡号"></div>
+					</div>
+				</div>
+				<!-- 
+				<div class="form_box po_re findpw_tan">
+					<i class="form_icon  w_190">交易密码</i>
+					<div>
+						<div class="input_box po_re w_740"><input type="password" id="bank_paypassword" name="bank_paypassword" class="input" placeholder="请输入交易密码"></div>
+					</div>
+				</div> 
+				-->
+				<div class="form_btn">
+					<input type="button" class="btn" onclick="Update()" name="addbank" id="addbank" value="确认添加">
+				</div>
+				<div class="form_link red">
+					  注:请详细填写您的银行卡信息作为默认提款账号 
+				</div>
+			</form>
+		</div>
+		<div class="add_bank">
+			<div class="bc_f8 hui_bg fz_4">
+				<div class="margin_bian">银行卡帐户（1）</div>
+			
+			        <#list myBankList as b>
+					<div class="wallet_box">
+						<div class="margin_lbian">
+							<div class="wallet_box1 withdraw_box1 po_re">
+								<div class="withdraw_box1_l left">
+									<p class="hui_d">${b.bank!}[${b.banknum!}]</p>
+									<p class="hui_d">支行名称：${b.bankname!}</p>
+								</div>
+								<span class="right orange">${b.realname!}						<!-- &nbsp;&nbsp;<a class="cancel" href="javascript:void(0)" onclick="UpdateB(413)">删除</a> -->
+								</span>
+							</div>
+							<div class="wallet_box2 withdraw_box2">
+								<ul>
+									<li><span class="hui_d fz_3-6">省份：</span>${b.province!}</li>
+									<li><span class="hui_d fz_3-6">城市：</span>${b.city!}</li>
+									
+								</ul>
+							</div>
+						</div>
+					</div>	
+			        </#list>
+			
+			
+			
+			
+			
+						
+				
+			</div>
+	</div>
+	</div>
+
+</div>
+<script type="text/javascript">
+	
+ $("#city_1").citySelect({nodata:"none",required:false});
+
+ $('#dialogBoxShadow').height($(document).height());
+ function closeAddress(){
+  $("#withdrawCnyAddress").hide();
+  $("#dialogBoxShadow").hide();
+ }
+ function showA(){
+  $("#withdrawCnyAddress").show();
+  $("#dialogBoxShadow").show();
+ }
+	
+ function Update(){
+  
+  /* var name=$('#bank_name').val(); */
+  var realname=$('#realname').val();
+  var bank=$('#bank_bank option:selected').val();
+  var bankprov=$('#bank_bankprov option:selected').val();
+  var bankcity=$('#bank_bankcity option:selected').val();
+  var bankaddr=$('#bank_bankaddr').val();
+  var bankcard=$('#bank_bankcard').val();
+  var paypassword=$('#bank_paypassword').val();
+  
+  
+ /*  if(name==""||name==null){
+  layer.alert('请输入备注名称');
+   return false;
+  } */
+  if(bankaddr==""||bankaddr==null){
+  layer.alert('请输入开户支行');
+   return false;
+  }
+  if(bankcard==""||bankcard==null){
+  layer.alert('请输入银行账号');
+   return false;
+  }
+  /* if(paypassword==""||paypassword==null){
+  layer.alert('请输入交易密码');
+   return false;
+  } */
+  $.post("yz_add_bank",{realname:realname,type:1,remark:'no',bank:bank,province:bankprov,city:bankcity,bankname:bankaddr,banknum:bankcard,paypassword:paypassword},function(data){
+   if(data.status==1){
+    layer.alert(data.message);
+    setTimeout(function(){
+  		window.location="setting";
+  	 }, 2000);
+    
+   }else{
+	layer.alert(data.message);
+   }
+  },"json");
+  
+ }
+
+ function UpdateB(id){
+  layer.config({
+   extend: 'extend/layer.ext.js'
+  });
+  layer.ready(function () {
+   //默认prompt
+   layer.prompt({
+    title: '输入交易密码，并确认',
+    formType: 1},function(val){
+    if (val) {
+     //需要执行的方法
+     $.post("/User/delbank.html",{type:2,id:id,paypassword:val},function(data){
+      if(data.status==1){
+       layer.msg(data.info,{icon:1});
+       window.location="/User/bank.html";
+      }else{
+       layer.msg(data.info,{icon:2});
+       if(data.url){
+        window.location=data.url;
+       }
+      }
+     },"json");
+
+
+    };
+   });
+
+  });
+
+
+ }
+</script>
+	<script language="javascript" src="${pd.basePath}static/xnb/js/lang/cn/city.js?v=1.04"></script>
+
+</body></html>

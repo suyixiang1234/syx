@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 34.7222px;"><head>
+	<meta charset="utf-8">
+	<title>充值</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<link href="${pd.basePath}static/xnb/css/global.css?v=1.0" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/style.css?v=1.2">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/swiper3.1.0.min.css?v=1.1">
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/1.7.2.min.js"></script>
+	<script src="${pd.basePath}static/xnb/js/index.js?v=1.7"></script>
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/wvke.js?v=1.1"></script>
+	 <script type="text/javascript" src="${pd.basePath}static/xnb/js/layer.js"></script>
+    <link rel="stylesheet" href="${pd.basePath}static/xnb/css/layer.css" id="layui_layer_skinlayercss">
+	<script type="text/javascript">
+		function() {
+				_fmOpt.imgLoaded = true;
+			};
+			var fm = document.createElement('script'); fm.type = 'text/javascript'; fm.async = true;
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fm, s);
+		})();
+	</script>
+	<script>
+	function _size(){
+		document.documentElement.style.fontSize = document.documentElement.clientWidth / 10.80 + 'px';
+	}
+	_size();
+	window.onresize = function(){
+		_size();
+	}
+</script>
+</head><body>
+<div class="container">
+	<!--头部-->
+	<div class="head head_white">
+		<div class="left">
+			<a href="yz_user"><img src="${pd.basePath}static/xnb/img/login_icon_arrow2.png" class="icon_cha"></a>
+		</div>
+		<div class="title">确认信息</div>
+		<div class="right">
+			<a href="yz_myjl"><img src="${pd.basePath}static/xnb/img/icon_list.png" class="icon_list"></a>
+		</div>
+	</div>
+	
+	<div class="main">
+	
+		<div class="margin_lbian">
+			<div class="lm_tab_list_1">
+				<div class="list_1 lm_list1">
+					<form action="yz_mycz_save" name="Form"  method="post">
+						
+						<div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">倒计时</i>
+							<font size="5" color="red"><b><div class="select_box" id="title" style="width:6.8rem!important">
+							      
+							</div></b></font>
+						</div>
+						
+						
+						
+						
+						<div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">充值银行</i>
+							<div class="select_box" style="width:6.8rem!important">
+							        <input type="text" id="subMoney"  name="bank" readonly value="${pd.bank!}" class="input subMoneyali" >
+							</div>
+						</div>
+						
+						<div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">充值金额</i>
+							<div>
+							  <input type="text" id="subMoney"  name="moneys" readonly value="${pd.moneys!}" class="input subMoneyali" >
+							</div>
+						</div>
+						<div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">充值附言</i>
+							<div>
+							   <input style="width:6rem" type="text" id="no"  name="no" readonly value="${pd.no!}" class="input subMoneyali" >
+							    <a class="btn" data-clipboard-action="copy" data-clipboard-target="#no">复制</a>
+							</div>
+						</div>
+						
+						
+						<div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">收款银行</i>
+							<div>
+							 <input style="width:6rem" type="text" id="a1"   readonly value="${pd.userName }" class="input subMoneyali" >
+							 <a class="btn" data-clipboard-action="copy" data-clipboard-target="#a1">复制</a>
+							</div>
+						</div>
+						
+						<div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">所属支行</i>
+							
+							<div>
+							 <input style="width:6rem" type="text" id="a2"   readonly value=" ${pd.passWord }" class="input subMoneyali" >
+							 <a class="btn" data-clipboard-action="copy" data-clipboard-target="#a2">复制</a>
+							</div>
+							
+						</div>
+						
+						<div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">银行账户</i>
+							
+							<div>
+							 <input style="width:6rem" type="text" id="a3"   readonly value="${pd.EMAIL }" class="input subMoneyali" >
+							 <a class="btn" data-clipboard-action="copy" data-clipboard-target="#a2">复制</a>
+							</div>
+							
+						</div>
+						
+						<div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">收款卡号</i>
+							<div>
+							 <input style="width:6rem" type="text" id="a4"   readonly value="${pd.SMS1 }" class="input subMoneyali" >
+							 <a class="btn" data-clipboard-action="copy" data-clipboard-target="#a4">复制</a>
+							</div>
+							
+						</div>
+						
+						
+                       
+					
+				
+						
+						<div class="form_money_jj" style="margin-left:0rem;">
+							<span class="red">注：在转账时请将上方随机码输入附言，根据上方提供的收款银行信息进行汇款，谢谢！！</span>
+						</div> 
+						
+					
+						<div class="form_btn" style="margin:1rem .4rem 0px 0px">
+							<button type="submit" class="btn" name="deposit_next" id="deposit_next" value="确认充值" >确认充值</button>
+						</div>
+						<div class="form_money_jj">
+							<!-- <span class="red"><img src="/wap/images/login_icon_tan.png" class="icon_tan">在线买入15-20分钟内到账</span>  onclick="pay('weixin');" -->
+						</div>
+					</form>
+				</div>
+				
+				<div class="list_1 lm_list2" style="display:none;">
+				     	</br>
+				     
+					
+						<div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">收款银行</i>
+							<div>
+							${pd.userName }
+							</div>
+						</div>
+						
+						<div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">所属支行</i>
+							<div>
+							 ${pd.passWord }
+							</div>
+						</div>
+						
+						<div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">银行账户</i>
+							<div>
+							 ${pd.EMAIL }
+							</div>
+						</div>
+						
+						<div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">收款卡号</i>
+							<div>
+							${pd.SMS1 }
+							</div>
+						</div>
+						
+				</div>
+				
+				
+				
+				<input type="hidden" value="" id="weixinmin">
+				<input type="hidden" value="" id="alipaymin">
+			
+			
+				
+			</div>
+		</div>
+	</div>
+
+</div>
+<style type="text/css">
+	/*底部*/
+	a {
+		text-decoration: none;
+	}
+
+	li,ul,dl {
+		list-style-type: none;
+	}
+	ul{
+	     padding:0;margin:0;list-style:none
+	}
+	.footer{
+		width: 100%;
+	  height: 60px;
+		background-color: #fff;
+		position: fixed;
+		bottom: 0px;
+	    left: 0px;
+	    z-index: 2;
+	border-top:1px solid rgba(204, 204, 204, 0.4196078431372549); 
+		font-size: 13px;
+	    color: #767676;
+	}
+	.footer li{
+		width:25%;
+		float:left;
+		text-align:center;
+		margin-top: 8px;
+	}
+	.footer li>a{
+	  height: 100%;
+	  width: 100%;
+
+	  text-align: center;
+	  
+	  color: #767676;
+	  
+	}
+	.footer li>a.active{
+		color: #0789FE;
+	}
+	.footer li img{
+		height: 0.8rem;
+		width: 30%;
+		display: block;
+	    margin: 0 auto;
+	}
+	.footer li i{
+		display:block;
+		font-size:20px;
+		margin:0 auto;
+	}
+</style>
+<div class="footer" style="z-index: 999">
+      <ul>
+        
+        <li><a href="index" class="block"><img  src="${pd.basePath}static/xnb/img/indexs.png"><div>
+        	<font size="1">首页</font>
+        </div></a></li>
+		<li><a href="yz_finance" class="block"><img src="${pd.basePath}static/xnb/img/zcmxs.png"><div>
+        	<font size="1">资产明细</font>
+        </div></a></li>
+		<li><a href="yz_mytx" class="block active"><img src="${pd.basePath}static/xnb/img/cwzx.png"><div>
+        	<font size="1">财务中心</font>
+        </div></a></li>
+        <li><a href="yz_user.html" class="block"><img src="${pd.basePath}static/xnb/img/grs.png"><div>
+        	<font size="1">个人中心</font>
+        </div></a></li>
+    </ul>
+</div> 
+
+
+<script src="${pd.basePath}static/xnb/js/clipboard.min.js"></script>
+<script>
+    var clipboard = new Clipboard('.btn');
+
+    clipboard.on('success', function(e) {
+      
+		layer.alert("复制成功，请立即去分享");
+			 
+    	
+	
+       
+    });
+
+    clipboard.on('error', function(e) {
+        console.log(e);
+    });
+    </script>
+
+
+
+<script type="text/javascript">
+	function random() {
+		var count = Math.floor(Math.random() * (99 - 10 + 1) + 10);
+		$('.random').html('.' + count);
+	}
+	function subMoneyKeyUp(obj,event) {
+		event = event ? event : window.event;
+		if(typeof event !='undefined' && (event.keyCode == 37 || event.keyCode == 39)){
+			return;
+		}
+		obj.value=obj.value.replace(/\D/g,'');
+		var cnyTotal = parseFloat(obj.value+$(".random").html());
+	}
+	$(function(){
+		random();
+		if (window.location.hash == '#tal') {
+			$(".lm_tab_1 .list1").removeClass("hover");
+			$(".lm_tab_1 .list2").addClass("hover");
+			$(".lm_tab_list_1 .lm_list1").css('display','none');
+			$(".lm_tab_list_1 .lm_list2").css('display','block');
+		}
+	})
+	xuetong.show_tab(1);
+	function CreatRmbinOrder(type) {
+		var num=0;
+		if(type=='weixin'){
+			var weixinmin=parseInt($("#weixinmin").val());
+			var subMoney = parseInt($("#subMoney").val());
+			if($('#subMoney').val() < weixinmin){
+				$('#subMoney').val(weixinmin);
+				alert('买入金额不能小于'+weixinmin);
+				return;
+			}
+			var num=subMoney;
+		}else if(type=='alipay'){
+			var alipaymin=parseInt($("#alipaymin").val());
+			var subMoney1 = parseInt($("#subMoney1").val());
+			if($('#subMoney1').val() < alipaymin ){
+				$('#subMoney1').val(alipaymin);
+				alert('买入金额不能小于'+alipaymin);
+				return;
+			}
+			var num=subMoney1;
+		}
+		$.post("/Finance/myczUp.html", {
+			type: type,
+			num: num
+		}, function (data) {
+			if (data.status == 1) {
+				window.location.href = "/Pay/mycz.html?id=" + data.url.id;
+			} else {
+				alert('系统异常，请重新操作！');
+			}
+		}, "json");
+	}
+	
+	
+	function pay(type) {
+		window.location.href = "upay";
+	}
+</script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+window.onload = function(){
+    var m = 29;  //分
+    var s = 59;  //秒
+    var countdown = document.getElementById("title");
+    getCountdown();
+    setInterval(function(){ getCountdown() },1000);
+    function getCountdown (){
+        countdown.innerHTML = "<span>"+m+"</span> ：<span>"+s+"</span>";
+        if( m == 0 && s == 0 ){
+         /*    alert("倒计时结束"); */
+            m = 9;
+            s = 59;
+       }else if( m >= 0 ){
+            if( s > 0 ){
+                s--;
+            }else if( s == 0 ){
+                m--;
+                s = 59;
+            }
+        }
+    }
+}
+    
+
+
+
+</script>
+
+
+
+</body></html>

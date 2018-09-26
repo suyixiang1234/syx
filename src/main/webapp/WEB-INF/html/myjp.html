@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 34.7222px;"><head>
+	<meta charset="utf-8">
+	<title>FTC</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<link href="${pd.basePath}static/xnb/css/global.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/style.css">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/swiper3.1.0.min.css">
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/1.7.2.min.js"></script>
+	<script src="${pd.basePath}static/xnb/js/index.js"></script>
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/wvke.js"></script>
+	<script type="text/javascript">
+		function() {
+				_fmOpt.imgLoaded = true;
+			};
+			var fm = document.createElement('script'); fm.type = 'text/javascript'; fm.async = true;
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fm, s);
+		})();
+	</script>
+	<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		document.documentElement.style.fontSize = document.documentElement.clientWidth / 10.80 + 'px';
+	});
+	</script>
+</head><body>
+<div class="container" ontouchstart="" id="container">
+	<!--头部-->
+	<div class="head head_white">
+		<div class="left">
+					<a href="yz_user"><img src="${pd.basePath}static/xnb/img/login_icon_arrow2.png" class="icon_cha"></a>
+					</div>
+		<div class="title">我的奖励</div>
+		<div class="right">
+		</div>
+	</div>
+		<div class="main pb_0">
+		<div class="mytrad_con">	
+		     
+		     
+		     <#list rewardList as r >
+			     <div class="wallet_box">
+					<div class="margin_lbian">
+						<div class="wallet_box1 withdraw_box1 po_re">
+							<div class="withdraw_box1_l left">
+								<p class="hui_d">推荐账户ID：${r.xuser_id}</p>
+								<p class="hui_d">返利时间： ${r.times}</p>
+							</div>
+							<span class="right orange">
+								充值奖励
+						    </span>
+						</div>
+						<div class="wallet_box2 withdraw_box2">
+							<ul>
+							    <li><span class="hui_d fz_3-6">充值金额：</span> ${r.jmoneys}</li>
+								<li><span class="hui_d fz_3-6">奖励金额：</span> ${r.moneys}</li>
+							</ul>
+						</div>
+						
+					</div>
+				</div>
+	        </#list>
+	
+	
+	
+</div>
+		</div>
+</div>
+
+
+<script>
+$(function(){ 
+  var winH = $(window).height(); //页面可视区域高度 
+  var i = 1; //设置当前页数 
+  $(window).scroll(function () { 
+    var pageH = $(document.body).height(); 
+    var scrollT = $(window).scrollTop(); //滚动条top 
+    var aa = (pageH-winH-scrollT)/winH; 
+    if(aa<0.02){ 
+      $.getJSON("result.php",{page:i},function(json){ 
+        if(json){ 
+          var str = ""; 
+          $.each(json,function(index,array){ 
+            var str = "<div class=\"single_item\"><div class=\"element_head\">"; 
+            var str += "<div class=\"date\">"+array['date']+"</div>"; 
+            var str += "<div class=\"author\">"+array['author']+"</div>"; 
+            var str += "</div><div class=\"content\">"+array['content']+"</div></div>"; 
+            $("#container").append(str); 
+          }); 
+          i++; 
+        }else{ 
+          $(".nodata").show().html("别滚动了，已经到底了。。。"); 
+          return false; 
+        } 
+      }); 
+    } 
+  }); 
+}); 
+</script>
+
+
+</body></html>

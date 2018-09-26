@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 34.7222px;"><head>
+	<meta charset="utf-8">
+	<title>FTC</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<link href="${pd.basePath}static/xnb/css/global.css?v=1.0" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/style.css?v=1.2">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/swiper3.1.0.min.css?v=1.1">
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/1.7.2.min.js"></script>
+	<script src="${pd.basePath}static/xnb/js/index.js?v=1.7"></script>
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/wvke.js?v=1.1"></script>
+		<script type="text/javascript">
+			function() {
+					_fmOpt.imgLoaded = true;
+				};
+				var fm = document.createElement('script'); fm.type = 'text/javascript'; fm.async = true;
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fm, s);
+			})();
+		</script>
+		<script>
+		function _size(){
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 10.80 + 'px';
+		}
+		_size();
+		window.onresize = function(){
+			_size();
+		}
+	</script>
+</head><body>
+<div class="container">
+	<!--头部-->
+	<div class="head head_white">
+		<div class="left">
+			<a href="yz_user"><img src="${pd.basePath}static/xnb/img/login_icon_arrow2.png" class="icon_cha"></a>
+		</div>
+		<div class="title">充值</div>
+		<div class="right">
+			<a href="yz_myjl"><img src="${pd.basePath}static/xnb/img/icon_list.png" class="icon_list"></a>
+		</div>
+	</div>
+	<div style="height: 0.0rem;width: 100%;margin-top: 1.53rem">
+		<a href="yz_mytx.html"><div style="float: left;width: 50%;height:1.1rem;background-color:#9d9c9b;color: #fff;font-size: 0.5rem;text-align: center;line-height: 1.1rem"><b>提现</b></div></a>
+		<div style="float: left;width: 50%;height:1.1rem;background-color: #5EADEC;color: #fff;font-size: 0.5rem;text-align: center;line-height: 1.1rem"><b>充值</b></div>
+	</div>
+	<div class="main">
+		<div class="list_tab">
+			<ul class="list_tab_con clear margin lm_tab_1" style="width:97%">
+				<li class="list_1 list1 hover">【快捷充值】</li>
+			    <li class="list_1 list2">-【网银汇款】</li> 
+			    <li class="list_1 list3">-【微信充值】</li> 
+			
+			</ul>
+		</div>
+		<div class="margin_lbian">
+			<div class="lm_tab_list_1">
+				<div class="list_1 lm_list1">
+					<form id="rmbin" action="yz_mycz_next" name="Form"  method="post">
+						
+						<div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">选择银行</i>
+							<div class="select_box" style="width:6.8rem!important">
+								<select name="bank" id="bank_bank" class="select">
+								<option value="农业银行">农业银行</option><option value="中国银行">中国银行</option><option value="工商银行">工商银行</option><option value="建设银行">建设银行</option><option value="浦发银行">浦发银行</option><option value="邮政银行">邮政银行</option><option value="广发银行">广发银行</option><option value="交通银行">交通银行</option><option value="民生银行">民生银行</option><option value="招商银行">招商银行</option><option value="中信银行">中信银行</option><option value="兴业银行">兴业银行</option><option value="光大银行">光大银行</option><option value="北京银行">北京银行</option><option value="其它">其它</option>							</select>
+							</div>
+						</div>
+						
+						<div class="form_money_jj" style="margin-left:3rem;">
+							<span class="red">1.充值时限:请在30分钟内完成</span>
+						</div> 
+						
+						<div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">充值金额</i>
+							<div>
+								<div class="input_box po_re"><input type="text" id="subMoney"  value="500" name="moneys" class="input subMoneyali" placeholder="请输入充值金额" onkeyup="this.value=this.value.replace(/\D/g,'')"></div>
+							</div>
+						</div>
+						
+						<div class="form_money_jj" style="margin-left:3rem;">
+							<span class="red">2.充值金額:最低500，最高50000</span>
+						</div> 
+						
+						<!-- <div class="form_box po_re findpw_tan">
+							<i class="form_icon  w_190">联系手机</i>
+							<div>
+								<div class="input_box po_re"><input type="text" id="tel" name="mo" readonly value="${pd.PHONE}" class="input" placeholder="请输入手机号码"></div>
+							</div>
+						</div> -->
+					
+						<div class="form_btn">
+							<button type="submit" class="btn" name="deposit_next" id="deposit_next" value="下一步" >下一步</button>
+						</div>
+						<div class="form_money_jj">
+							<!-- <span class="red"><img src="/wap/images/login_icon_tan.png" class="icon_tan">在线买入15-20分钟内到账</span>  onclick="pay('weixin');" -->
+						</div>
+					</form>
+				</div>
+				
+				<input type="hidden" value="" id="weixinmin">
+				
+				<input type="hidden" value="" id="alipaymin">
+			
+			
+			
+				<div class="list_1 lm_list2" style="display:none;">
+				     </br>
+					 <div align="center"><img style="width:43px;" src="${pd.basePath}static/xnb/img/uico7.png" /> 正在维护中，请选择其它充值方式！！</div>
+				</div>
+				<div class="list_1 lm_list2" style="display:none;">
+				     </br>
+					 <div align="center"><img style="width:43px;" src="${pd.basePath}static/xnb/img/uico7.png" /> 正在维护中，请选择其它充值方式！！</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<style type="text/css">
+	/*底部*/
+	a {
+		text-decoration: none;
+	}
+
+	li,ul,dl {
+		list-style-type: none;
+	}
+	ul{
+	     padding:0;margin:0;list-style:none
+	}
+	.footer{
+		width: 100%;
+	  height: 60px;
+		background-color: #fff;
+		position: fixed;
+		bottom: 0px;
+	    left: 0px;
+	    z-index: 2;
+	border-top:1px solid rgba(204, 204, 204, 0.4196078431372549); 
+		font-size: 13px;
+	    color: #767676;
+	}
+	.footer li{
+		width:25%;
+		float:left;
+		text-align:center;
+		margin-top: 8px;
+	}
+	.footer li>a{
+	  height: 100%;
+	  width: 100%;
+
+	  text-align: center;
+	  
+	  color: #767676;
+	  
+	}
+	.footer li>a.active{
+		color: #0789FE;
+	}
+	.footer li img{
+		height: 0.8rem;
+		width: 30%;
+		display: block;
+	    margin: 0 auto;
+	}
+	.footer li i{
+		display:block;
+		font-size:20px;
+		margin:0 auto;
+	}
+</style>
+<div class="footer" style="z-index: 999">
+      <ul>
+        
+        <li><a href="index" class="block"><img  src="${pd.basePath}static/xnb/img/indexs.png"><div>
+        	<font size="1">首页</font>
+        </div></a></li>
+		<li><a href="yz_finance" class="block"><img src="${pd.basePath}static/xnb/img/zcmxs.png"><div>
+        	<font size="1">资产明细</font>
+        </div></a></li>
+		<li><a href="yz_mytx.html" class="block active"><img src="${pd.basePath}static/xnb/img/cwzx.png"><div>
+        	<font size="1">财务中心</font>
+        </div></a></li>
+        <li><a href="yz_user.html" class="block"><img src="${pd.basePath}static/xnb/img/grs.png"><div>
+        	<font size="1">个人中心</font>
+        </div></a></li>
+    </ul>
+</div> 
+<script type="text/javascript">
+	function random() {
+		var count = Math.floor(Math.random() * (99 - 10 + 1) + 10);
+		$('.random').html('.' + count);
+	}
+	function subMoneyKeyUp(obj,event) {
+		event = event ? event : window.event;
+		if(typeof event !='undefined' && (event.keyCode == 37 || event.keyCode == 39)){
+			return;
+		}
+		obj.value=obj.value.replace(/\D/g,'');
+		var cnyTotal = parseFloat(obj.value+$(".random").html());
+	}
+	$(function(){
+		random();
+		if (window.location.hash == '#tal') {
+			$(".lm_tab_1 .list1").removeClass("hover");
+			$(".lm_tab_1 .list2").addClass("hover");
+			$(".lm_tab_list_1 .lm_list1").css('display','none');
+			$(".lm_tab_list_1 .lm_list2").css('display','block');
+		}
+	})
+	xuetong.show_tab(1);
+	function CreatRmbinOrder(type) {
+		var num=0;
+		if(type=='weixin'){
+			var weixinmin=parseInt($("#weixinmin").val());
+			var subMoney = parseInt($("#subMoney").val());
+			if($('#subMoney').val() < weixinmin){
+				$('#subMoney').val(weixinmin);
+				alert('买入金额不能小于'+weixinmin);
+				return;
+			}
+			var num=subMoney;
+		}else if(type=='alipay'){
+			var alipaymin=parseInt($("#alipaymin").val());
+			var subMoney1 = parseInt($("#subMoney1").val());
+			if($('#subMoney1').val() < alipaymin ){
+				$('#subMoney1').val(alipaymin);
+				alert('买入金额不能小于'+alipaymin);
+				return;
+			}
+			var num=subMoney1;
+		}
+		$.post("/Finance/myczUp.html", {
+			type: type,
+			num: num
+		}, function (data) {
+			if (data.status == 1) {
+				window.location.href = "/Pay/mycz.html?id=" + data.url.id;
+			} else {
+				alert('系统异常，请重新操作！');
+			}
+		}, "json");
+	}
+	
+	
+	function pay(type) {
+		window.location.href = "upay";
+	}
+</script>
+
+
+
+</body></html>

@@ -1,0 +1,71 @@
+<html lang="en" style="font-size: 34.7222px;"><head>
+	<meta charset="utf-8">
+		<title>FTC</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<link href="${pd.basePath}static/xnb/css/global.css?v=1.0" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/style.css?v=1.2">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/swiper3.1.0.min.css?v=1.1">
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/1.7.2.min.js"></script>
+	<script src="${pd.basePath}static/xnb/js/index.js?v=1.7"></script>
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/wvke.js?v=1.1"></script>
+		<script>
+		function _size(){
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 10.80 + 'px';
+		}
+		_size();
+		window.onresize = function(){
+			_size();
+		}
+	</script>
+</head><body>
+<div class="container">
+	<!--头部-->
+	<div class="head head_white">
+		<div class="left">
+			<a href="yz_user"><img src="${pd.basePath}static/xnb/img/login_icon_arrow2.png" class="icon_cha"></a>
+		</div>
+		<div class="title">资讯中心</div>
+		<div class="right"></div>
+	</div>
+	<div class="main pb_0 po_re">
+		 <div class="marget_mytrad wb_100">
+			<div class="marget_t margin_bian">
+				<a  class="hover" style="width:100%">官方公告</a>
+			<!-- 	<a href="/Article/index/id/20">数币资讯</a> -->
+			</div>
+		</div> 
+		<div class="mytrad_con pt_165">
+		    
+		    
+		    <#list nlist as n>
+			    <div class="wallet_box">
+					<div class="margin_lbian">
+						<div class="wallet_box1 notice_box1">
+							<a href="article_detail.html?news_id=${n.news_id}">
+								<div class="left">
+									<span>${n.title}</span>
+									<p class="hui_d">${n.create_time}</p>
+								</div>
+								<img src="${pd.basePath}static/xnb/img/icon_jian.png" class="icon_jian icon_turn180 right">
+							</a>
+						</div>
+					</div>
+				</div>
+			    	
+			</#list>	
+		    
+			
+			
+		</div>
+		<div class="pages"></div>	
+</div>
+
+</div>
+
+
+</body></html>

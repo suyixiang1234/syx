@@ -1,0 +1,459 @@
+<html lang="en" style="font-size: 38.5185px;">
+   <head>
+	<meta charset="utf-8">
+	<title>货币交易</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<link href="${pd.basePath}static/xnb/css/global.css?v=1.0" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/style.css?v=1.2">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/swiper3.1.0.min.css?v=1.1">
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/1.7.2.min.js"></script>
+	<script src="${pd.basePath}static/xnb/js/index.js?v=1.7"></script>
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/wvke.js?v=1.1"></script>
+	<script type="text/javascript">
+	 
+	</script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 10.80 + 'px';
+		});
+	</script>
+	
+	 <style type="text/css">
+	    .swiper-container {
+	    width: 100%;
+	    height:200px;
+		}  
+    </style>
+
+	
+</head><body>
+
+
+<div class="container" style="padding-bottom: 1.5rem">
+
+<div class="head head_white">
+		<div class="left">
+		
+		</div>
+		<div class="title">FTC</div>
+		<div class="right">
+			<a href="http://kefu.ziyun.com.cn/vclient/chat/?websiteid=139948"><img style="width:27px;" src="${pd.basePath}static/xnb/img/kff.png" ></a>
+		</div>
+	</div>
+	
+	<div class="foot_download po_re" id="foot_download">
+		<!--<a href="javascript:void(0);" onclick="xuetong.uaFanction();"><img src="wap/images/download.png" width="100%"></a>-->
+		<span class="po_ab" onclick="xuetong.foot_download(1)">X</span>
+	</div>
+
+	<!--首页内容-->
+	<div class="main pb_0" id="gb-main" style="padding-top:1rem">			
+			<div class="swiper-container">
+				<div class="swiper-wrapper" >
+				    <#list plist as p>
+				          <div class="swiper-slide"><img style="width:100%;height:200px" src="${pd.basePath}uploadFiles/uploadImgs/${p.PATH}" alt=""></div>
+				    </#list>
+					<!-- 
+					<div class="swiper-slide"><img style="width:100%;height:200px" src="${pd.basePath}static/xnb/img/banner4.jpg" alt=""></div>
+					<div class="swiper-slide"><img style="width:100%;height:200px" src="${pd.basePath}static/xnb/img/banner3.jpg" alt=""></div>				
+					 -->
+				</div>
+				<!-- 如果需要分页器 -->
+				<div class="swiper-pagination"></div>
+				
+				<!-- 如果需要导航按钮 -->
+				<!-- <div class="swiper-button-prev"></div>
+				<div class="swiper-button-next"></div>-->
+				
+				<!-- 如果需要滚动条 -->
+				<div class="swiper-scrollbar"></div>
+			</div>	
+										
+		    <div class="index_notice clear" >
+				
+				
+				  <div class="index_notice_con" >
+				   <marquee scrollamount="3" >
+				   
+				    <!--  <img   src="${pd.basePath}static/xnb/img/012d2059accd89a8012028a9d9bf43.gif" class="icon_notice">
+				 -->
+				
+				 	  <#list nlist as n>
+					  <#if n_index<2>
+														
+					    <a href="article_detail.html?news_id=${n.news_id}"> 【${n_index+1}】${n.title}； </a>
+					</#if>
+					  </#list>
+				   </marquee>
+				  
+				  </div>
+			</div>
+			
+			<!--未登录状态-->
+			<div class="index_user">
+				<div class="index_user">
+					<div class="index_user_all">
+					<!--		
+					<div class="index_user_con">
+						<a>帐户:hzy123456<a/>&nbsp;&nbsp;&nbsp;&nbsp;<a class="green">UID:617</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="red">账户钱包总额:￥0</a>
+					</div>
+					-->
+						<ul class="index_user_nav clear" style="border-right:7px solid #ccc;border-left:7px solid #ccc;">
+							 <#list blist as b>
+							   <#if b_index < 4>
+							     <a href="trade.html?coins_id=${b.coins_id}">
+							  	   <li style="border-right:1px solid #ECEFF5;">
+								   ${b.name!}
+								   <br>
+								   <font size="4px" color="green"><b>¥<span id="bh${b_index}">${b.money!}</span></b></font>
+								    <br>
+								   <font size="2px" color="#ccc"><b>${b.counts!}</b></font>
+								   <!-- <br>
+								   <#if b_index == 0>
+									    <font size="1px" color="green">
+			                            <span style="color: #fff;margin-top: 0.35rem;text-align: center;border-radius:20% ;width: 1.6rem;background-color: #A01818" id="deal_btc">+${b.up_money}</span>
+			                            </font>
+								   <#else>
+									    <font size="1px" color="green">
+			                            <span style="color: #fff;margin-top: 0.35rem;text-align: center;border-radius:20% ;width: 1.6rem;background-color: green" id="deal_btc">+${b.up_money}</span>
+			                            </font>
+								   </#if> -->
+								</li>
+								</a>
+							  
+							   </#if>
+							     
+								 
+							 </#list>
+						</ul>
+				     </div>
+			   </div>
+			</div>
+					
+		
+					
+		<!--登陆后状态-->
+		<div class="index_coin" style="border-right:7px solid #ccc;border-left:7px solid #ccc;">
+		    <div class="index_info_t clear hui_a">
+				<div style="margin:-18px .4rem">
+				    <img src="${pd.basePath}static/xnb/img/hot.gif" class="icon_info left">
+					<!--<p>资讯中心<a href="/Article/index/id/19" class="right hui_c">更多</a></p>-->
+                    <p><font size="2.5"><b>涨幅榜</b></font></p>
+				</div>
+			    </div>
+		        <#list blist as b>
+			       <div class="index_coin_card">
+					<a href="trade.html?coins_id=${b.coins_id}">
+					<ul class="clear">
+						<li class="wb_11">
+						  <#if b_index == 0>
+							<img src="${pd.basePath}static/xnb/img/LKB5.png" width="100%" class="icon_coin">
+						  <#else>
+						    <img src="${pd.basePath}uploadFiles/uploadImgs/${b.img!}" style="width:28px;" class="icon_coin"><!--  ${pd.basePath}static/xnb/img/M3.png -->
+						  </#if>	
+						</li>
+						<li class="wb_37">
+							<p class="hui_c"><b>${b.name!}</b></p>
+							<span id="btc_rmb_new"><font size="2" color="#ccc">${b.counts!}</font></span>
+							<div class="icon_arrow icon_arrow_b" id="rate-btc"></div>
+						</li>
+						<li class="wb_26">
+							<p class="hui_c"><b>成交额</b></p>
+							<span id="btc_sum_box"><font size="3" color="#green"><span id="bhs${b_index}">${b.money!}</span></font></span>
+						</li>
+						<li class="wb_26">
+					    	<span id="mousespeed${b_index}" style="margin-top: 0.35rem;text-align: center;border-radius:10% ;width: 1.6rem;" id="deal_btc"><img src="${pd.basePath}static/xnb/img/inline3.png"></span> 
+						</li>
+					</ul>
+					</a>
+				  </div>
+			    </#list>			
+		 </div>
+		 <div  style="border-top:0.32rem solid #f6f6f8;border-bottom:.32rem solid #f6f6f8">
+			<div class="">
+				<div style="margin:15px .4rem">
+                    <p><font size="2.5"><b>资讯中心</b></font></p>
+				</div>
+			</div>
+			<ul class="index_info_c margin_bian">
+			    <#list nlist as n>
+			    	<li style="width:102%"><span class="hui_d">[09-09]</span><a href="article_detail.html?news_id=${n.news_id}">${n.title}...</a></li>
+			    </#list>				
+			</ul>
+		</div>
+		<div class="index_trust" style="background:#1A252C;padding:24px">
+			<font color="#fff">	
+			<h2 class="hui_a center"><b><font color="#fff">	专业的安全保障</font></b></h2>
+			<ul class="center clear">
+				<li>
+					<img src="${pd.basePath}static/xnb/img/safe-1.png" style="width:40px" >
+					<p>系统可靠</p>
+				</li>
+				<li>
+					<img src="${pd.basePath}static/xnb/img/safe-2.png" style="width:40px">
+					<p>资金安全</p>
+				</li>
+				<li>
+					<img src="${pd.basePath}static/xnb/img/safe-3.png" style="width:40px">
+					<p>快捷方便</p>
+				</li>
+				<li>
+					<img src="${pd.basePath}static/xnb/img/safe-4.png" style="width:40px">
+					<p>服务专业</p>
+				</li>
+			</ul>
+             </font>
+		</div>
+				
+		<!-- 
+		<div class="index_prompt">
+			<h2 class="hui_a center">会炒股 即会玩</h2>
+			<p class="index_prompt_jj hui_c">均通过低买高卖赚取差价获利。7*24小时交易、无涨跌幅限制，更利于投资者投资获利！</p>
+			<ul>
+				<li>
+					<img src="http://app.uxex.vip/wap/images/index_prompt1.png" class="index_prompt_img">
+					<span>开户流程</span>
+					<i></i>
+					<p>注册登陆，即刻交易</p>
+				</li>
+				<li>
+					<img src="http://app.uxex.vip/wap/images/index_prompt2.png" class="index_prompt_img">
+					<span>投资门槛</span>
+					<i></i>
+					<p>200QC起</p>
+				</li>
+				<li>
+					<img src="http://app.uxex.vip/wap/images/index_prompt3.png" class="index_prompt_img">
+					<span>交易提现</span>
+					<i></i>
+					<p>T+0交易，随时提现</p>
+				</li>
+				<li>
+					<img src="http://app.uxex.vip/wap/images/index_prompt4.png" class="index_prompt_img">
+					<span>交易时间</span>
+					<i></i>
+					<p>7*24小时交易</p>
+				</li>
+				<li>
+					<img src="http://app.uxex.vip/wap/images/index_prompt5.png" class="index_prompt_img">
+					<span>发行总量</span>
+					<i></i>
+					<p>总量恒定，持续增值</p>
+				</li>
+			</ul>
+		</div>
+	    -->
+	
+		
+		
+	</div></div>
+	
+	
+<style type="text/css">
+	/*底部*/
+	a {
+		text-decoration: none;
+		
+	}
+
+	li,ul,dl {
+		list-style-type: none;
+	}
+	ul{
+	     padding:0;margin:0;list-style:none
+	}
+	.footer{
+		width: 100%;
+	  height: 54px;
+		background-color: #fff;
+		position: fixed;
+		bottom: 0px;
+	    left: 0px;
+	    z-index: 2;
+	border-top:1px solid rgba(204, 204, 204, 0.4196078431372549); 
+		font-size: 13px;
+	    color: #767676;
+	}
+	.footer li{
+		width:25%;
+		float:left;
+		text-align:center;
+		margin-top: 5px;
+	}
+	.footer li>a{
+	  height: 100%;
+	  width: 100%;
+
+	  text-align: center;
+	  
+	  color: #767676;
+	  
+	}
+	.footer li>a.active{
+		color: #5EADEC;
+	}
+	.footer li img{
+		height: 0.8rem;
+		width: 30%;
+		display: block;
+	    margin: 0 auto;
+	}
+	.footer li i{
+		display:block;
+		font-size:20px;
+		margin:0 auto;
+	}
+</style>
+<div class="sparkline" data-type="bar" data-width="97%" data-height="100px" data-bar-Width="14" data-bar-Spacing="7" data-bar-Color="#f39c12">
+                6,4,8, 9, 10, 5, 13, 18, 21, 7, 9
+              </div>
+
+
+
+  <div class="footer" style="z-index: 999">
+     <ul>
+        
+        <li ><a href="index" class="block active"><img  src="${pd.basePath}static/xnb/img/index.png"><div>
+        	<font size="1">首页</font>
+        </div></a></li>
+        
+        <li >
+		<a href="yz_finance" class="block"><img src="${pd.basePath}static/xnb/img/zcmxs.png"><div>
+        	<font size="1">资产明细</font>
+        </div></a>
+        </li>
+        
+        
+		<!-- <li style="width:20%;margin-top:3px;">
+		<a href="http://kefu.ziyun.com.cn/vclient/chat/?websiteid=139948" class="block"><img src="${pd.basePath}static/xnb/img/kff.png"><div>
+        	<font size="1">客服中心</font>
+        </div></a>
+        </li> -->
+		<li ><a href="yz_mytx.html" class="block"><img src="${pd.basePath}static/xnb/img/cwzxs.png"><div>
+        	<font size="1">财务中心</font>
+        </div></a></li>
+        <li ><a href="yz_user" class="block"><img src="${pd.basePath}static/xnb/img/grs.png"><div>
+        	<font size="1">个人中心</font>
+        </div></a></li>
+    </ul>
+</div> 
+<script type="text/javascript" src="${pd.basePath}static/xnb/js/swiper3.1.0.min.js"></script>
+<script type="text/javascript" src="${pd.basePath}static/xnb/js/jquery.sparkline.min.js"></script>
+
+<script>
+
+
+
+  
+  <#list blist as b>
+  
+	  window.setInterval("bhs${b_index}()",2000); 
+	  var vals${b_index}=0;
+	  function bhs${b_index}(){
+	    var vals${b_index} =parseFloat($('#bhs${b_index}').html());
+	    vals${b_index} = vals${b_index}+parseFloat(${b.up_money});
+	    vals${b_index} = vals${b_index}.toFixed(3);
+	    $('#bh${b_index}').html(vals${b_index})
+	    $('#bhs${b_index}').html(vals${b_index})
+	  }
+	  
+	  
+  </#list>
+  
+
+  var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            //点击圆点切换
+            paginationClickable: true,
+            // 图片之间的距离
+            spaceBetween: 30,
+            // 默认状态下活动块居左，设定为true时，活动块会居中。
+           centeredSlides: true,
+            // 自动轮播时间
+            autoplay: 3000,
+            // 如果设置为false，用户操作swiper之后自动切换不会停止，每次都会重新启动autoplay。
+            autoplayDisableOnInteraction: false,
+            // 3D切换效果
+             effect: 'fade', 
+            //左右滑动
+            // direction: 'horizontal',
+            // 设置为true则windows改变尺寸时swiper会重新初始化。
+            resizeReInit: true,
+
+             lazyLoading: true,
+             preloadImages: false,
+            // 当所有的内嵌图像（img标签）加载完成后Swiper会重新初始化。
+            updateOnImagesReady: true,
+            paginationClickable: true,
+            // 图片之间的距离
+             spaceBetween: 0,
+            //slidesPerColumn参数
+             slidesPerColumn: 1,
+            //滑动速度，即slider自动滑动开始到结束的时间（单位ms）
+            speed: 600,
+            loop: true,
+            initialSlide: 0,
+            // 如果启用，仅有“可视”的slides会最后适应容器的大小
+             visibilityFullFit: true ,
+        });
+		
+		
+	drawMouseSpeedDemo();
+		
+	function drawMouseSpeedDemo() {
+		var mrefreshinterval = 1000; // update display every 500ms
+		var lastmousex = -1;
+		var lastmousey = -1;
+		var lastmousetime;
+		var mousetravel = 4;
+		var mpoints = [];
+		var mpoints_max = 30;
+		$('html').mousemove(function (e) {
+		  var mousex = e.pageX;
+		  var mousey = e.pageY;
+		  if (lastmousex > -1) {
+			mousetravel += Math.max(Math.abs(mousex - lastmousex), Math.abs(mousey - lastmousey));
+		  }
+		  lastmousex = mousex;
+		  lastmousey = mousey;
+		});
+		var mdraw = function () {
+		  var md = new Date();
+		  var timenow = md.getTime();
+		  <#list blist as b>
+			  if (lastmousetime && lastmousetime != timenow) {
+			     mousetravel = Math.floor(Math.random()*1000+1);
+				var pps = Math.round(mousetravel / (timenow - lastmousetime) * 1000);
+				mpoints.push(pps);
+				if (mpoints.length > mpoints_max)
+				  mpoints.splice(0, 1);
+				mousetravel = 0;
+				$('#mousespeed${b_index}').sparkline(mpoints, {width: mpoints.length * 2, tooltipSuffix: ' pixels per second'});
+		      }
+		  </#list>
+		  
+		  lastmousetime = timenow;
+		  setTimeout(mdraw, mrefreshinterval);
+		};
+		// We could use setInterval instead, but I prefer to do it this way
+		setTimeout(mdraw, mrefreshinterval);
+	  }		
+		
+		
+		
+		
+		
+		
+</script>
+<!-- 轮播图结束 -->
+
+
+
+</body></html>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CoinsMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into xnb_coins(
+			name,	
+			money,	
+			counts,	
+			create_time,	
+			img,
+			max_money,
+			min_money,
+			up_money,	
+			coins_id
+		) values (
+			#{name},	
+			#{money},	
+			#{counts},	
+			#{create_time},	
+			#{img},	
+			#{max_money},	
+			#{min_money},	
+			#{up_money},	
+			#{coins_id}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from xnb_coins
+		where 
+			coins_id = #{coins_id}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  xnb_coins
+			set 
+				name = #{name},
+				money = #{money},
+				counts = #{counts},
+				img = #{img},
+				max_money = #{max_money},
+				min_money = #{min_money},
+				up_money = #{up_money},
+			coins_id = coins_id
+			where 
+				coins_id = #{coins_id}
+	</update>
+	
+	<update id="edit1" parameterType="pd">
+		update  xnb_coins
+			set 
+				money =money+up_money
+			
+	</update>
+	
+	
+	<!-- 通过id获取数据 -->
+	<select id="findById" parameterType="pd" resultType="map">
+		select 
+			*
+		from 
+			xnb_coins
+		where 
+			coins_id = #{coins_id}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		a.*
+		from 
+			xnb_coins a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="map">
+		select
+			a.*
+		from 
+			xnb_coins a
+		order by a.name = 'LKB币/CNY' DESC,a.create_time DESC
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from xnb_coins
+		where 
+			coins_id in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

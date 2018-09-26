@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RewardMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into xnb_reward(
+			user_id,	
+			xuser_id,	
+			moneys,	
+			times,	
+			jmoneys,	
+			rates,	
+			remark,	
+			reward_id
+		) values (
+			#{user_id},	
+			#{xuser_id},	
+			#{moneys},	
+			#{times},	
+			#{jmoneys},	
+			#{rates},	
+			#{remark},	
+			#{reward_id}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from xnb_reward
+		where 
+			reward_id = #{reward_id}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  xnb_reward
+			set 
+				user_id = #{user_id},
+				xuser_id = #{xuser_id},
+				moneys = #{moneys},
+				jmoneys = #{jmoneys},
+				rates = #{rates},
+				remark = #{remark},
+			reward_id = reward_id
+			where 
+				reward_id = #{reward_id}
+	</update>
+	
+	
+	<!-- 通过id获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			user_id,	
+			xuser_id,	
+			moneys,	
+			times,	
+			jmoneys,	
+			rates,	
+			remark,	
+			reward_id
+		from 
+			xnb_reward
+		where 
+			reward_id = #{reward_id}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+			a.user_id,	
+			a.xuser_id,	
+			a.moneys,	
+			a.times,	
+			a.jmoneys,	
+			a.rates,	
+			a.remark,	
+			a.reward_id
+		from 
+			xnb_reward a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="map">
+		select
+			a.*
+		from 
+			xnb_reward a
+	
+		where a.user_id = #{user_id}
+		order by a.times desc
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from xnb_reward
+		where 
+			reward_id in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

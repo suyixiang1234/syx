@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 34.7222px;"><head>
+	<meta charset="utf-8">
+	<title>FTC</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<link href="css/global.css?v=1.0" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="css/style.css?v=1.2">
+	<link rel="stylesheet" type="text/css" href="css/swiper3.1.0.min.css?v=1.1">
+	<link rel="stylesheet" type="text/css" href="css/dropload.css">
+	<script src="js/index.js?v=1.7"></script>
+	<script type="text/javascript" src="js/wvke.js?v=1.1"></script>
+	<script>
+		function _size(){
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 10.80 + 'px';
+		}
+		_size();
+		window.onresize = function(){
+			_size();
+		}
+	</script>
+</head>
+<body>
+<div class="container outer" ontouchstart="">
+	<!--头部-->
+	<div class="head head_white">
+		<div class="left"><a onclick="window.history.go(-1)"><img src="img/login_icon_arrow2.png" class="icon_cha"></a></div>
+		<div class="title">
+			委托记录
+			<input type="hidden" id="status" value="">
+			<input type="hidden" id="market" value="etc_cny">
+			<input type="hidden" id="type" value="0">
+		</div>
+		<div class="right"></div>
+	</div>
+	<div class="main pb_0 inner" style="height:100%;">
+		<div class="mytrab_con pb_0">
+			<div class="list_tab mytrab_con_list">
+				<ul class="list_tab_con list_mytrad_con clear lm_tab_1" style="width:14rem !important;">
+					    <li id="1" class="hover list_1">
+						<a href="/Finance/mywt/type/0/market/ltc_cny/">
+								莱特币			
+                        </a>
+						</li>
+						<li id="2" >
+							<a href="/Finance/mywt/type/0/market/etc_cny/">
+								以太经典							</a>
+						</li>
+						<li id="3">
+							<a href="/Finance/mywt/type/0/market/eth_cny/">
+								以太坊							</a>
+						</li>
+						<li id="4">
+							<a href="/Finance/mywt/type/0/market/btc_cny/">
+								比特币							</a>
+						</li>
+						<li id="5">
+							<a href="/Finance/mywt/type/0/market/xrp_cny/">
+								瑞波币							</a>
+						</li>
+						<li id="6">
+							<a href="/Finance/mywt/type/0/market/neo_cny/">
+								小蚁币							</a>
+						</li>
+						<li id="7">
+							<a href="/Finance/mywt/type/0/market/ml_cny/">
+								美链							</a>
+						</li>				</ul>
+			</div>
+		</div><input type="hidden" value="0" id="pageys">
+		<div class="lm_tab_list_1">
+			<div class="mytrad_con list_1 pb_0 lists">
+			   
+			<div class="wallet_box">
+				<div class="margin_lbian">
+					<div class="wallet_box1 withdraw_box1 po_re">
+						<div class="withdraw_box1_l left">
+							<p class="hui_d">价格：2.251</p>
+							<p class="hui_d">时间：2018-08-08 00:34:55</p>
+						</div>
+						<span class="right orange">
+							买入
+																																		</span>
+					</div>
+					<div class="wallet_box2 withdraw_box2">
+						<ul>
+							<li><span class="hui_d fz_3-6">数量：</span>50</li>
+							<li><span class="hui_d fz_3-6">成交数量：</span>50</li>
+							<li><span class="hui_d fz_3-6">已完成</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="wallet_box">
+				<div class="margin_lbian">
+					<div class="wallet_box1 withdraw_box1 po_re">
+						<div class="withdraw_box1_l left">
+							<p class="hui_d">总额：2.251</p>
+							<p class="hui_d">时间：2018-08-04 12:23:22</p>
+						</div>
+						<span class="right orange">
+							买入																											</span>
+					</div>
+					<div class="wallet_box2 withdraw_box2">
+						<ul>
+							<li><span class="hui_d fz_3-6">价格：</span>￥0.215</li>
+							<li><span class="hui_d fz_3-6">数量：</span>200</li>
+							<li><span class="hui_d fz_3-6">已完成</span></li>
+							<!--<li><span class="hui_d fz_3-6">到账：</span>￥0.00</li> -->
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+		    </div>
+		</div>
+	
+	
+	
+	</div>
+</div>
+
+<script src="/wap/js/dropload/zepto.min.js"></script>
+<script src="/wap/js/dropload/dropload.min.js"></script>
+<script>
+var pageys=document.getElementById("pageys").value;
+var type=document.getElementById("type").value;
+var status=document.getElementById("status").value;
+var market=document.getElementById("market").value;
+$(function(){
+    var dropload = $('.inner').dropload({
+        domDown : {
+            domClass   : 'dropload-down',
+            domRefresh : '<div class="dropload-refresh" id="zwsj">↑上拉加载更多</div>',
+            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+            domNoData  : '<div class="dropload-noData">暂无数据</div>'
+        },
+        loadDownFn : function(me){
+            $.ajax({
+                type: 'GET',
+                url: "/Finance/getLazywt.html",
+				data:{"type":type,"market":market,"status":status,"page":document.getElementById("pageys").value},
+                dataType: 'json',
+                success: function(data){
+					var result = '';
+					if(data['page']==0){
+						me.noData();
+					}else{
+						result +=data['content'];
+					}
+					document.getElementById("pageys").value=data['page'];
+					 setTimeout(function(){
+                        $('.lists').append(result);
+                        // 每次数据加载完，必须重置
+                        dropload.resetload();
+                    },1000);
+                },
+                error: function(xhr, type){
+                    //alert('信息异常，请刷新后重试!');
+                    // 即使加载出错，也得重置
+                    dropload.resetload();
+                }
+            });
+        }
+    });
+});
+</script>
+<script>
+	var market=$("#market").val();
+	$("#type-selectTest,#market-selectTest").change(function(){
+		var type=$("#type-selectTest option:selected").val();
+		
+		window.location='/Finance/mywt/type/'+type+'/status/'+status+'/market/'+market+'.html';
+	});
+	$(function () {
+		xuetong.show_tab(1);
+		setTimeout(function(){
+			$('body,html').animate({scrollTop: 0}, 0);
+		},1)
+	});
+</script>
+
+</body></html>

@@ -1,0 +1,201 @@
+<html lang="en" style="font-size: 34.7222px;"><head>
+	<meta charset="utf-8">
+	<title>FTC</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<link href="${pd.basePath}static/xnb/css/global.css?v=1.0" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/style.css?v=1.2">
+	<link rel="stylesheet" type="text/css" href="${pd.basePath}static/xnb/css/swiper3.1.0.min.css?v=1.1">
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/1.7.2.min.js"></script>
+	<script src="${pd.basePath}static/xnb/js/index.js?v=1.7"></script>
+	<script type="text/javascript" src="${pd.basePath}static/xnb/js/wvke.js?v=1.1"></script>
+	<script>
+		function _size(){
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 10.80 + 'px';
+		}
+		_size();
+		window.onresize = function(){
+			_size();
+		}
+	</script>
+</head>
+<body>
+<div class="container" style="padding-bottom: 1.5rem">
+	<!--头部-->
+	<div class="head head_white">
+		<div class="left"><a onclick="history.go(-1)"><img src="${pd.basePath}static/xnb/img/login_icon_arrow2.png" class="icon_cha"></a></div>
+		<div class="title">资产明细</div>
+		<div class="right"></div>
+	</div>
+	<div class="main pb_0">
+		<div class="assets_con myassets_con" style="background:#5EADEC;">
+			<div class="margin_bian">
+				<div class="myassets_con1" style=" margin-top:18px;">账户总额:<span id="zong"><b>￥ ${pd.moneys?c}</b></span></div>
+				<!--<div class="myassets_con2"><span>净资产</span></div>-->
+			</div>
+		</div>
+
+		<div class="myassets_list">
+			
+			
+			<#if financeList?size == 0>
+			   <div class="myassets_box">
+				<a >
+				<div class="margin_lbian">
+					<div class="borrow_box1 clear" style="border-bottom:1px solid #f6f6f8;">
+						<p class="center">暂无币值，请尽快去交易</p>
+					</div>
+				 </div>
+			     </a>
+			  </div>
+			</#if>
+			
+			<#list financeList as f>
+			
+			 <#if f.t_counts != 0>
+			
+			
+			  <div class="myassets_box">
+				<a href="trade.html?coins_id=${f.coins_id}">
+				<div class="margin_lbian">
+					<div class="borrow_box1 clear" style="border-bottom:1px solid #f6f6f8;">
+						<img src="${pd.basePath}uploadFiles/uploadImgs/${f.img!}" width="100%" class="coin left">
+						<p class="left">${f.name!}</p>
+					</div>
+					<div class="borrow_box2 fz_3-9">
+					
+						<span><em>币数量：</em><font size="4"><b>${f.t_counts!'0'}</b></font></span>
+						<span><em>购买价格：</em>
+						<#if f.t_counts == 0 >
+						   0
+						</#if>
+						<#if f.t_counts != 0 >
+						  ${f.shijia!'0'}
+						</#if>
+						</span> 
+						<span><em>购买总额：</em>${f.moneys_all?c}</span>
+						<span><em>当前价格：</em><i class="green"><span id="bhs${f_index}">${f.money!}</span></i></span> 
+						<span><em>实时收益：</em><i class="red"><font size="4.5"><span id="bh${f_index}">计算中...</span></font></i></span>
+						
+						<div style="text-align:right;margin-top:-24px">
+						<font color="#ccc">去交易 > </font>
+						</div>
+					
+					</div>
+				 </div>
+			     </a>
+			  </div>
+			  
+			  </#if>
+			
+			</#list>
+			
+			</div>
+	</div>
+</div>
+<style type="text/css">
+	/*底部*/
+	a {
+		text-decoration: none;
+	}
+
+	li,ul,dl {
+		list-style-type: none;
+	}
+	ul{
+	     padding:0;margin:0;list-style:none
+	}
+	.footer{
+		width: 100%;
+	  height: 54px;
+		background-color: #fff;
+		position: fixed;
+		bottom: 0px;
+	    left: 0px;
+	    z-index: 2;
+	border-top:1px solid rgba(204, 204, 204, 0.4196078431372549); 
+		font-size: 13px;
+	    color: #767676;
+	}
+	.footer li{
+		width:25%;
+		float:left;
+		text-align:center;
+		margin-top: 5px;
+	}
+	.footer li>a{
+	  height: 100%;
+	  width: 100%;
+
+	  text-align: center;
+	  
+	  color: #767676;
+	  
+	}
+	.footer li>a.active{
+		color: #0789FE;
+	}
+	.footer li img{
+		height: 0.8rem;
+		width: 30%;
+		display: block;
+	    margin: 0 auto;
+	}
+	.footer li i{
+		display:block;
+		font-size:20px;
+		margin:0 auto;
+	}
+</style>
+<div class="footer" style="z-index: 999">
+    <ul>
+        
+        <li><a href="index" class="block"><img  src="${pd.basePath}static/xnb/img/indexs.png"><div>
+        	<font size="1">首页</font>
+        </div></a></li>
+		<li><a href="yz_finance" class="block  active"><img src="${pd.basePath}static/xnb/img/zcmx.png"><div>
+        	<font size="1">资产明细</font>
+        </div></a></li>
+		<li><a href="yz_mytx" class="block"><img src="${pd.basePath}static/xnb/img/cwzxs.png"><div>
+        	<font size="1">财务中心</font>
+        </div></a></li>
+        <li><a href="yz_user" class="block"><img src="${pd.basePath}static/xnb/img/grs.png"><div>
+        	<font size="1">个人中心</font>
+        </div></a></li>
+    </ul>
+</div> 
+
+<script>
+  
+ <#list financeList as b>
+  
+	  window.setInterval("bhs${b_index}()",2000); 
+	
+	  function bhs${b_index}(){
+		  var vals${b_index}=0;
+	    var vals${b_index} =parseFloat($('#bhs${b_index}').html());
+	    vals${b_index} = vals${b_index}+parseFloat(${b.up_money});
+	    vals${b_index} = vals${b_index}.toFixed(3);
+	    $('#bhs${b_index}').html(vals${b_index})
+	    
+	    //展示实时盈亏
+	    var sy${b_index} =parseFloat((${b.t_counts}*vals${b_index})) - parseFloat(${b.moneys_all?c});
+	    sy${b_index} = sy${b_index}.toFixed(3);
+	    $('#bh${b_index}').html(sy${b_index})
+	    
+	    
+	  
+	    
+	  }
+	  
+	  
+  </#list>
+
+
+
+		
+</script>
+
+</body></html>
